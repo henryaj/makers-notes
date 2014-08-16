@@ -25,6 +25,7 @@ A quick way of filling an array with strings:
 ```ruby
 array.each 		# => Loops over each item in an array
 array.map 		# => Does something to each item in an array, and creates a new array of the same size from the results
+array.map!		# => Like map, but overwrites the original array with the result of the process
 array.select 	# => Evaluates a condition and returns matching items from the array
 array.reject 	# => Does the opposite of select!
 ```
