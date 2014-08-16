@@ -10,7 +10,7 @@ All of
 <=
 ```
 
-evaluate to true or false.
+evaluate to ```True or ```False.
 
 The fact that a variable is set makes it ```True```. Everything in Ruby is ```True``` unless it's ```False``` or ```nil```.
 
