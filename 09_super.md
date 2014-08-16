@@ -3,6 +3,7 @@
 If you define a method of the same name as a parent's method, the child method takes priority.
 
 ```bikecontainer.rb```:
+
 ```ruby
 module BikeContainer
 	
@@ -13,6 +14,7 @@ end
 ```
 
 ```garage.rb```:
+
 ```ruby
 class Garage
 
