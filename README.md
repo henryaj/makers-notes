@@ -1,6 +1,6 @@
 # Makers Academy notes
 
-Notes from my time at @makersacademy.
+Notes from my time at Makers Academy.
 
 ## Table of Contents
 
