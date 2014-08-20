@@ -20,7 +20,7 @@ Now, every time you (or your code) calls ```Time.now```, it will return
 => 2014-01-01 00:00:00 +0000
 ```
 
-In the Boris bike example, you can use ```Timecop.trave``` in your test to jump forward in time (which saves you having to wait in real-time for your method to run).
+In the Boris bike example, you can use ```Timecop.travel``` in your test to jump forward in time (which saves you having to wait in real-time for your method to run).
 
 ```ruby
 hire(bike)
