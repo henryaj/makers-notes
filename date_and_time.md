@@ -15,6 +15,9 @@ Time.now
 require 'date'
 DateTime.new
 # => #<DateTime: -4712-01-01T00:00:00+00:00 ((0j,0s,0n),+0s,2299161j)> 
+
+DateTime.now.asctime
+# => "Wed Aug 20 15:39:31 2014"
 ```
 
 ## Testing time
