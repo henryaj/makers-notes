@@ -1,6 +1,21 @@
 # Date and Time
 
-Date and time are painful to work with. Ruby's built-in Time and Date classes help.
+Date and time are painful to work with. Ruby's built-in ```Time``` and ```Date``` classes help.
+
+## Time
+
+```ruby
+Time.now
+# => 2014-08-20 15:33:47 +0100 
+```
+
+## Date
+
+```ruby
+require 'date'
+DateTime.new
+# => #<DateTime: -4712-01-01T00:00:00+00:00 ((0j,0s,0n),+0s,2299161j)> 
+```
 
 ## Testing time
 
