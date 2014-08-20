@@ -14,17 +14,17 @@ For example, in your test you can write
 Timecop.freeze(Time.local(2014))
 ```
 
-Now, every time you (or your code) requests ```Time.now```, it will return
+Now, every time you (or your code) calls ```Time.now```, it will return
 
 ```ruby
 => 2014-01-01 00:00:00 +0000
 ```
 
-In the Boris bike example, you can jump forward in time (which saves you having to wait in real-time for your method to run).
+In the Boris bike example, you can use ```Timecop.trave``` in your test to jump forward in time (which saves you having to wait in real-time for your method to run).
 
 ```ruby
 hire(bike)
-Timecop.travel(1801) # half an hour and one second
+Timecop.travel(1801) # travels forward by half an hour and one second
 dock(bike)
 => "Ride was over 30 mins; you need to pay £2.50"
 ```
