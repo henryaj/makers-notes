@@ -1,9 +1,5 @@
 # Makers Academy notes
 
-Notes from my time at Makers Academy.
-
-## Table of Contents
-
 * [Logic and Booleans](https://github.com/henryaj/makers-notes/blob/master/logic_and_booleans.md)
 * [Collections](https://github.com/henryaj/makers-notes/blob/master/collections.md)
 * [Git](https://github.com/henryaj/makers-notes/blob/master/git.md)
