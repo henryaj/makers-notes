@@ -21,3 +21,10 @@ Now, every time you (or your code) requests ```Time.now```, it will return
 ```
 
 In the Boris bike example, you can jump forward in time (which saves you having to wait in real-time for your method to run).
+
+```ruby
+hire(bike)
+Timecop.travel(1801) # half an hour and one second
+dock(bike)
+=> "Ride was over 30 mins; you need to pay £2.50"
+```
