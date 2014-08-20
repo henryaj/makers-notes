@@ -6,7 +6,10 @@ Date and time are painful to work with. Ruby's built-in ```Time``` and ```Date``
 
 ```ruby
 Time.now
-# => 2014-08-20 15:33:47 +0100 
+ => 2014-08-20 15:33:47 +0100 
+
+Time.now.zone
+ => "BST" # British Summer Time in the UK
 ```
 
 ## Date
@@ -14,10 +17,10 @@ Time.now
 ```ruby
 require 'date'
 DateTime.new
-# => #<DateTime: -4712-01-01T00:00:00+00:00 ((0j,0s,0n),+0s,2299161j)> 
+ => #<DateTime: -4712-01-01T00:00:00+00:00 ((0j,0s,0n),+0s,2299161j)> 
 
 DateTime.now.asctime
-# => "Wed Aug 20 15:39:31 2014"
+ => "Wed Aug 20 15:39:31 2014"
 ```
 
 ## Testing time
