@@ -8,7 +8,19 @@ How do you test a method which requires a wait (such as charging the user when r
 
 Use [timecop](https://github.com/travisjeffery/timecop).
 
-For example, in your test you can write 
+First, install timecop with
+
+```ruby
+gem install timecop
+```
+
+Then require timecop in your code.
+
+```ruby
+require 'Timecop'
+```
+
+Now you're ready to use it to manipulate time. For example, in your test you can write 
 
 ```ruby
 Timecop.freeze(Time.local(2014))
