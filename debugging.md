@@ -30,10 +30,12 @@ Segmentation faults can be a pain to debug because they don't provide the stack 
 
 Indentation is important! Unlike in other languages, the Ruby interpreter doesn't care about indentation. But a lack of proper indentation makes it much harder to spot missing `do`s and `end`s and other syntax errors.
 
-### ```filter_run :focus```
+### `filter_run :focus`
 
-Add the following line to your lib/spec_helper.rb file:
+Add the following line to your spec/spec_helper.rb file (you'll need to have initialised it with `rspec --init` first):
 
-```filter_run :focus => true```
+`filter_run :focus => true`
 
-This allows you to prepend a specific test with ```fit``` (instead of the usual ```it```) to focus in on it when running RSpec.
+This allows you to prepend a specific test with `fit` (instead of the usual `it`) to focus in on it when running RSpec.
+
+Make sure to change `fit` back to `it` when done, otherwise all of your tests will be ignored.
