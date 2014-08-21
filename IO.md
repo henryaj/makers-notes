@@ -27,3 +27,13 @@ some_file.close
 These methods are useful but don't tend to get used in webapps – databases are preferred because their IO is non-blocking.
 
 ## CSV files
+
+```ruby
+require 'csv'
+
+CSV.foreach("new.csv") do |row|
+  puts row.inspect
+end
+```
+
+The above script loads up the CSV library, and then opens `new.csv` and extracts each row as an array.
