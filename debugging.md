@@ -34,7 +34,9 @@ Indentation is important! Unlike in other languages, the Ruby interpreter doesn'
 
 Add the following line to your spec/spec_helper.rb file (you'll need to have initialised it with `rspec --init` first):
 
-`filter_run :focus => true`
+```ruby
+filter_run :focus => true
+```
 
 This allows you to prepend a specific test with `fit` (instead of the usual `it`) to focus in on it when running RSpec.
 
