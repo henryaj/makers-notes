@@ -10,3 +10,5 @@
 * [Testing styles](https://github.com/henryaj/makers-notes/blob/master/testing_styles.md)
 * [Blocks, procs and lambdas](https://github.com/henryaj/makers-notes/blob/master/blocks_procs_and_lambdas.md)
 * [Super](https://github.com/henryaj/makers-notes/blob/master/super.md)
+* [Pairing](https://github.com/henryaj/makers-notes/blob/master/pairing.md)
+* [IO](https://github.com/henryaj/makers-notes/blob/master/io.md)
