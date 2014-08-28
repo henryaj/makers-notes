@@ -77,5 +77,5 @@ end
 You can also use `super` in string interpolation, like this:
 
 ```ruby
-#{super}
+puts "#{super}"
 ```
