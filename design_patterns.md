@@ -10,6 +10,53 @@ Just as there are repeated problems in architecture and engineering, so there ar
 
 ## Decorator methods
 
+Decorator methods are used to *add functionality to instances of a class without modifying the class itself.* They are a flexible alternative to sublassing.
+
+Say you wanted a method for the coffee that your store sells:
+
+```ruby
+class Coffee
+  def price
+    2
+  end
+end
+```
+
+No problem. But what about coffee with milk? And coffee with syrup? And coffee with both? Quite quickly you need an exponentially larger number of classes.
+
+You could subclass instead, like this:
+
+```ruby
+class CoffeeWithMilk < Coffee
+  def price
+    super + 0.2
+  end
+end
+```
+
+But this has its problems too: the subclass will identify as such and not as a member of the parent class, and you still need lots of classes. Instead, you could use a decorator method to extend the functionality of an instance of the class:
+
+```ruby
+module Milk
+  def cost
+    super + 0.2
+  end
+end
+
+module Syrup
+  def cost
+    super + 0.4
+  end
+end
+
+coffee = Coffee.new
+
+coffee.extend Milk  # price is now 2.2
+coffee.extend Syrup # price is now 2.6
+```
+
+There are a number of different ways to do this in Ruby; the above is only one example.
+
 ## Factory methods
 
 ## Builder pattern
