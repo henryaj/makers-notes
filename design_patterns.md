@@ -38,3 +38,14 @@ end
 
 puts first_character(adapter(490283)) => 4
 ```
+
+## Visitor methods
+
+Adds functionality that draws information from existing classes without changing the classes themselves.
+
+Examples:
+
+* extracting the age from an object of class `Employee`
+* extracting an object's price to calculate VAT
+
+Importantly, a visitor class doesn't affect the core functions of any other classes – it follows the *open/closed principle*. They're easier to comprehend and adapt, and improve code readability over using blocks.
