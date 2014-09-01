@@ -12,11 +12,13 @@ Just as there are repeated problems in architecture and engineering, so there ar
 
 ## Factory methods
 
-## Builder methods
+## Builder pattern
 
-These are methods that initialize the objects you want to create.
+A builder pattern defines an instance for creating an object but lets subclasses decide which class to isntantiate. Builder patterns are used for building these complex objects independently of the mechanisms that go into creating their components. They allow the complex object to be easily 'customised' by specifying the number and types of components required.
 
-You wouldn't start out using this method – ideally, the pattern will emerge *as you are coding*.
+Builder patterns may be desired to simplify the inputs required to create the object (e.g. avoid having to manually build arrays needed as arguments for component objects) or to hide the detail of an object's creation from other applications/users. 
+
+You wouldn't start designing your code using a builder pattern. Rather, it emerges in response to growing complexity. Generally designs starts out by using the factory method to manage creation of components and evolves towards a builder pattern as the number of required components increases.
 
 ## Adapter methods
 
