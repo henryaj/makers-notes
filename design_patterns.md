@@ -57,7 +57,11 @@ coffee.extend Syrup # price is now 2.6
 
 There are a number of different ways to do this in Ruby; the above is only one example.
 
-## Factory methods
+## Factory pattern
+
+Where you define an interface for creating objects, but letting the subclasses that implement the interface decide which class to instantiate.
+
+Say you have a set of 'component' classes but don't know which ones you will need until run time – you can use a factory method to instantiate these objects.
 
 ## Builder pattern
 
