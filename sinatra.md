@@ -62,4 +62,8 @@ This will run, but doesn't have any actual tests (or *scenarios*). Let's add som
 
 This `Given`/`When`/`Then` notation is particular to Cucumber (or specifically Gherkin, the language Cucumber is written in).
 
-For each step, you write a step definition in Ruby. cucumber-sinatra has some built in step definitions, so you can write some steps without needing to define them (like `When I am on the homepage`).
+For each step, you write a step definition in Ruby. 
+
+cucumber-sinatra has some built in step definitions, so you can write some steps without needing to define them (like `When I am on the homepage`). These built-in definitions live in `features/step_definitions/`, and there are support files in `support/` which do things like substituting 'homepage' for '/'. **Consider deleting `features/step_definitions/web_steps.rb` to get some practice in writing your own step definitions.**
+
+Cucumber also uses a language called [Capybara](https://github.com/jnicklas/capybara).
