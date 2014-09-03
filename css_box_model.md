@@ -10,3 +10,7 @@ The properties it uses are:
 * **border** – immediately around the padding
 * **margin** – immediately around the border
 * **offset**
+
+Using CSS feels like this:
+
+![Peter Griffin tries CSS](http://i.imgur.com/Q3cUg29.gif)
