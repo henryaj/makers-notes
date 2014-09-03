@@ -14,3 +14,8 @@ The properties it uses are:
 Using CSS feels like this:
 
 ![Peter Griffin tries CSS](http://i.imgur.com/Q3cUg29.gif)
+
+## Useful resources
+* [Learn CSS Layout](http://learnlayout.com) is an incredible resource.
+* [Lean to Code HTML & CSS](http://learn.shayhowe.com/html-css/) is also very good.
+* [CSS Tricks](http://css-tricks.com)
