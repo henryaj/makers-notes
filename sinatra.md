@@ -80,6 +80,20 @@ $ rackup
 
 What this command *actually does* is read through your `sample_app.rb` file, looks at the various routes you've set, and creates a *routing table* from it. Then it starts an HTTP server on a particular port and makes it available for connections.
 
+## Config
+
+Look at the following code from the [Sinatra documentation](http://www.sinatrarb.com/configuration.html):
+
+```ruby
+set :views, Proc.new { File.join(root, "templates") }
+```
+
+Why do it this way? Seems kinda convoluted.
+
+The reason this is so important is that it bases the path to your `views` directory on the site root. If you ran `rackup` from a different directory and you'd hard-coded the views path, then it would break – it wouldn't be able to find views relative to where you're running the server file from.
+
+Using `root` gives a salient point that your site is always run from.
+
 ## Sessions
 
 HTTP by nature is *stateless* - so it doesn't recognise repeat visitors, or even visitors across pages. A lot of basic things fail because of this – how could you log in to a site, for example, if it didn't remember you?
