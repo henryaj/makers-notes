@@ -2,6 +2,8 @@
 
 **Sinatra** is a DSL (*domain-specific language*, or a language written for a specific purpose) for building web applications.
 
+It can be confusing. Suddenly, the single-user terminal apps you've been writing are up on the web for everyone to see, and they need to behave differently as a result.
+
 ```ruby
 require 'sinatra'
 
@@ -68,6 +70,16 @@ cucumber-sinatra has some built in step definitions, so you can write some steps
 
 Cucumber also uses a language called [Capybara](https://github.com/jnicklas/capybara).
 
+## Running the damn thing
+
+Get your server up and running by typing
+
+```shell
+$ rackup
+```
+
+What this command *actually does* is read through your `sample_app.rb` file, looks at the various routes you've set, and creates a *routing table* from it. Then it starts an HTTP server on a particular port and makes it available for connections.
+
 ## Sessions
 
 HTTP by nature is *stateless* - so it doesn't recognise repeat visitors, or even visitors across pages. A lot of basic things fail because of this – how could you log in to a site, for example, if it didn't remember you?
@@ -98,3 +110,25 @@ class SampleApp < Sinatra::Base
 
 end
 ```
+
+Bear in mind that sessions have a hard limit of 4KB! Usually, to store more than this, you would use a database.
+
+If you wanted to solely use Sinatra, though, you could do this the Very Wrong Way: setting a constant and then writing to that.
+
+```ruby
+class SampleApp < Sinatra::Base
+  enable :sessions
+
+  GAME = Game.new
+
+  get '/' do
+    @number = session
+    erb :index
+  end
+
+  get '/a/:number' do |number|
+    number = Game.number
+    redirect to '/'
+  end
+
+end
