@@ -67,3 +67,34 @@ For each step, you write a step definition in Ruby.
 cucumber-sinatra has some built in step definitions, so you can write some steps without needing to define them (like `When I am on the homepage`). These built-in definitions live in `features/step_definitions/`, and there are support files in `support/` which do things like substituting 'homepage' for '/'. **Consider deleting `features/step_definitions/web_steps.rb` to get some practice in writing your own step definitions.**
 
 Cucumber also uses a language called [Capybara](https://github.com/jnicklas/capybara).
+
+## Sessions
+
+HTTP by nature is *stateless* - so it doesn't recognise repeat visitors, or even visitors across pages. A lot of basic things fail because of this – how could you log in to a site, for example, if it didn't remember you?
+
+This is where sessions come into play.
+
+The server creates a unique ID (or UID) for each visitor and stores it in a hash table. This value is served back up to users to identify them, either in a cookie or (more rarely) in the URI itself. A *cookie* is returned as part of the header – it's just a string inside the header.
+
+A cookie sent by a particular site can only be read from the browser by that site.
+
+So how do you use sessions in Sinatra?
+
+`sample_app.rb`:
+
+```ruby
+class SampleApp < Sinatra::Base
+  enable :sessions
+
+  get '/' do
+    @number = session
+    erb :index
+  end
+
+  get '/a/:number' do |number|
+    session['number']= number
+    redirect to '/'
+  end
+
+end
+```
