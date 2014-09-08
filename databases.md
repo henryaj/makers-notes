@@ -57,7 +57,4 @@ Other commands you can run:
 * `x.get(3)` – returns the element with ID 3
 * `x.first_or_create` – gets the first element if it exists, otherwise creates it
 
-## Types of database
-
-* **Relational** – store data and the relationships between data in many tables.
-* **Key-value**
+There are many more of these methods – refer to the [Datamapper documentation](http://datamapper.org/docs/) for more.
