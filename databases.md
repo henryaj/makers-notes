@@ -51,6 +51,7 @@ link.destroy # deletes the row
 Other commands you can run:
 
 * `x.new` – creates a new instance. Set its attributes with `x.attributes`
+* `x.create` – creates a new instance with attributes that you specify.
 * `x.all` – returns the entire database
 * `x.first` – returns the first element in the database
 * `x.last` – returns the final element in the database (be careful with ordering, though, as this may not be done in a consistent way across databases)
