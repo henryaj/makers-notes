@@ -13,6 +13,8 @@ Having to switch between your nice object-oriented language into SQL (structured
 
 This also saves you from having to know exactly how the database protocol works. Not all relational databases have the same protocol, but you can just use a different ORM to deal with this. (Note that this is a nice example of the *adapter pattern*.)
 
+### ORMs – Datamapper
+
 A tool like [Datamapper](http://datamapper.org) is an example of an ORM – it makes setting up and interacting with databases from within Ruby trivial.
 
 For example, say you create the class `Link`:
