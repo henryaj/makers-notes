@@ -17,3 +17,36 @@ Databases are very particular about the types of input they accept. There are no
 Having to switch between your nice object-oriented language into SQL (structured query language) every five minutes is super annoying. So there's an intermediate layer, called ORM (Object Relational Mapping), that translates your OO commands into an SQL query.
 
 This also saves you from having to know exactly how the database protocol works. Not all relational databases have the same protocol, but you can just use a different ORM to deal with this. (Note that this is a nice example of the *adapter pattern*.)
+
+A tool like [Datamapper](http://datamapper.org) is an example of an ORM – it makes setting up and interacting with databases from within Ruby trivial.
+
+For example, say you create the class `Link`:
+
+```ruby 
+class Link
+  include DataMapper::Resource
+
+  property :id,     Serial
+  property :title,  String
+  property :url,    String
+end
+```
+
+Now, when you run `DataMapper.finalize`, it dives into the class you made, takes the class name, downcases it, pluralises it, turns it into a symbol, and makes a new table with that name. It also adds the `property` items as columns in the table.
+
+Run `DataMapper.auto_upgrade!` and DataMapper will go and actually make the database and tables.
+
+In your code, you can now make new links and do things to them.
+
+```ruby
+link = Link.create(title: 'Makers Academy',
+                   description: 'Learn to code in 12 weeks',
+                   url: 'http://www.makersacademy.com')
+
+link.attributes (title: 'Join Makers Academy') # updates the row
+link.save # saves the change
+
+link.update (title: 'Join Makers Academy') # does the above but with one command
+
+link.destroy # deletes the row
+```
