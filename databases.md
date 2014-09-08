@@ -7,11 +7,6 @@ Think of a database as being like an Excel workbook. One workbook contains many 
 
 Databases are very particular about the types of input they accept. There are no strings – there are only `VARCHAR`s (variable character fields) which usually have a limit of 255 characters. To store objects longer than this, you might have to use `TEXT` (in Postgres) or a `BLOB` (binary large object).
 
-## Types of database
-
-* **Relational** – store data and the relationships between data in many tables.
-* **Key-value**
-
 ## Interacting with databases
 
 Having to switch between your nice object-oriented language into SQL (structured query language) every five minutes is super annoying. So there's an intermediate layer, called ORM (Object Relational Mapping), that translates your OO commands into an SQL query.
@@ -50,3 +45,17 @@ link.update (title: 'Join Makers Academy') # does the above but with one command
 
 link.destroy # deletes the row
 ```
+
+Other commands you can run:
+
+* `x.new` – creates a new instance. Set its attributes with `x.attributes`
+* `x.all` – returns the entire database
+* `x.first` – returns the first element in the database
+* `x.last` – returns the final element in the database (be careful with ordering, though, as this may not be done in a consistent way across databases)
+* `x.get(3)` – returns the element with ID 3
+* `x.first_or_create` – gets the first element if it exists, otherwise creates it
+
+## Types of database
+
+* **Relational** – store data and the relationships between data in many tables.
+* **Key-value**
