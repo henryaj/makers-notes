@@ -1,4 +1,12 @@
-# CSS: The box model
+# CSS
+
+## Divs
+
+The problem with `<div>`s is that they aren't very descriptive. By definition, a `<div>` is a block element with no semantic meaning.
+
+Much better is to use tags that are meaningful – which will be especially important for visually-impaired users that are using a screenreader.
+
+## CSS: The box model
 
 This is a basic model for laying out CSS elements.
 
