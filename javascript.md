@@ -23,6 +23,45 @@ Variable names are in camel case, with a lowercase first letter. Curly braces ar
 * `class`
 * `def`
 
+### Setting variables
+
+```javascript
+name = "hello"; // This is a global variable!
+var name = "hello"; // That's better – an instance variable.
+
+var name; // This creates a variable, like setting something to nil in Ruby.
+
+// Create a bunch of variables in one go:
+var player1, player2, game;
+```
+
+### No implicit returns
+
+In Ruby, the last line of a method is returned by default. In Javascript, you have to specify a return.
+
+```javascript
+Game.prototype.winner = function() {
+    return player1
+}
+```
+
+### Specify your arguments!
+
+```javascript
+'abc'.toUpperCase    // raises an error
+'abc'.toUpperCase()  // that's better!
+```
+
+### No `attr_writer` and `attr_reader`
+
+By default in Javascript, all variables are readable and writable.
+
+### Comparisons
+
+JS uses `===` for comparisons.
+
+## Some example code
+
 Here we're defining Player and Game classes.
 
 ```javascript
@@ -47,24 +86,10 @@ function Player(name) {
 }
 ```
 
-Now, by making a very small change to our JS, we get a bunch of our tests passing:
-
 ```javascript
 Game.prototype.winner = function() {
 
 }
-```
-
-## Setting variables
-
-```javascript
-name = "hello"; // This is a global variable!
-var name = "hello"; // That's better – an instance variable.
-
-var name; // This creates a variable, like setting something to nil in Ruby.
-
-// Create a bunch of variables in one go:
-var player1, player2, game;
 ```
 
 ## Testing Javascript
