@@ -86,12 +86,10 @@ function Player(name) {
 }
 ```
 
-```javascript
-Game.prototype.winner = function() {
-
-}
-```
-
 ## Testing Javascript
 
 By default, JS is tested in the browser. [Jasmine](http://jasmine.github.io) is a good BDD testing library for JS.
+
+## JQuery
+
+JQuery is a Javascript library which lets you easily manipulate HTML elements on the page. Elements are targeted by using their CSS selectors, which is intuitive.
