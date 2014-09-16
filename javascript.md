@@ -90,6 +90,33 @@ function Player(name) {
 
 By default, JS is tested in the browser. [Jasmine](http://jasmine.github.io) is a good BDD testing library for JS.
 
+## Diagnosing problems with `console.log()`
+
+You can use `console.log()` to write something (the thing in brackets) to the console, which can be a useful debugging tool.
+
 ## JQuery
 
 JQuery is a Javascript library which lets you easily manipulate HTML elements on the page. Elements are targeted by using their CSS selectors, which is intuitive.
+
+JQuery is also very good for looking out for user events. This could be almost anything – the user scrolling down the page, clicking, mousing over something, filling in a form... 
+
+To begin, put this boilerplate code at the end of your HTML body inside *script* tags:
+
+```js
+  $(document).ready(function()){
+    // code goes here!
+  }
+```
+
+This tells JQuery to wait for the document to be loaded before running, and then runs the block of code inside.
+
+Say we want to look out for an event that happens to an image on the page – specifically, when it gets clicked. You can use this code inside your `(document).ready` function:
+
+```js
+$('img').on('click', function () {
+    // this code gets executed when the user clicks an image
+    $('#result').text('You clicked a button!');
+    })
+```
+
+You may wish to add specific attributes to certain elements in order to target them using JQuery, e.g. `<img src="..." data-pick="hello">`. You can then target the element using this `data-pick` attribute.
