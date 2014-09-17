@@ -1,23 +1,53 @@
----
-layout: default
----
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Makers Notes by henryaj</title>
 
-<div class="home">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Makers Notes</h1>
+        <p>My notes from the @makersacademy course.</p>
+        <p class="view"><a href="https://github.com/henryaj/makers-notes">View the Project on GitHub <small>henryaj/makers-notes</small></a></p>
+        <ul>
+          <li><a href="https://github.com/henryaj/makers-notes/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/henryaj/makers-notes/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/henryaj/makers-notes">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <ul>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/logic_and_booleans.md">Logic and Booleans</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/collections.md">Collections</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/git.md">Git</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/rspec.md">RSpec</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/classes.md">Classes</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/setter_and_getter_methods.md">Setter and getter methods</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/inheritance_and_composition.md">Inheritance and composition</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/testing_styles.md">Testing styles</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/blocks_procs_and_lambdas.md">Blocks, procs and lambdas</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/super.md">Super</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/pairing.md">Pairing</a></li>
+<li><a href="https://github.com/henryaj/makers-notes/blob/master/io.md">IO</a></li>
+</ul>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/henryaj">henryaj</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
