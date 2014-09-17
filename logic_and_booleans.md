@@ -10,9 +10,9 @@ All of
 <=
 ```
 
-evaluate to ```True or ```False.
+evaluate to `True or False`.
 
-The fact that a variable is set makes it ```True```. Everything in Ruby is ```True``` unless it's ```False``` or ```nil```.
+The fact that a variable is set makes it `True`. Everything in Ruby is `True` unless it's `False` or `nil`.
 
 ## Ternary operators
 
@@ -44,4 +44,4 @@ until
 end
 ```
 
-Avoid the use of ```!``` to negate a statement – use ```unless``` instead.
+Avoid the use of `!` to negate a statement – use `unless` instead.
