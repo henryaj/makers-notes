@@ -1,8 +1,12 @@
-# Git and GitHub
+---
+layout: page
+title: Git and GitHub
+permalink: /git-github/
+---
 
 Key commands:
 
-```shell
+```
 $ git clone <repo URL>
 $ git init
 $ git add .

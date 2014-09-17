@@ -1,4 +1,8 @@
-# Design Patterns
+---
+layout: page
+title: Design Patterns
+permalink: /designpatterns/
+---
 
 Just as there are repeated problems in architecture and engineering, so there are similar problems in programming. Design patterns, in computer science, are set ways of solving progamming problems.
 

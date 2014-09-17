@@ -1,4 +1,8 @@
-# Databases
+---
+layout: page
+title: Databases
+permalink: /databases/
+---
 
 > A digital washing machine for that gentleman! I'll send it by email
 > —*[Enrique Comba Riepenhausen](http://ecomba.pro), 2014*

@@ -1,5 +1,8 @@
-# Association
-
+---
+layout: page
+title: Associations
+permalink: /associations/
+---
 ## One-to-many
 
 Think of blog posts and their comments. Each post has *many* comments.

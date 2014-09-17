@@ -1,5 +1,8 @@
-# AJAX
-
+---
+layout: post
+title: AJAX
+permalink: /ajax/
+---
 AJAX is a browser technology that allows pages to be dynamically changed. Think about commenting on Facebook – the entire page doesn't refresh, the comment just appears live.
 
 AJAX allows a browser to make background HTTP requests and then use those resources to modify the page in some way.

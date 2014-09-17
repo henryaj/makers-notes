@@ -1,5 +1,8 @@
-# Inheritance and composition
-
+---
+layout: page
+title: Inheritance and Composition
+permalink: /inheritanceandcomposition/
+---
 ## Which one to choose?
 
 ```

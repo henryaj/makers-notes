@@ -1,4 +1,8 @@
-# Sinatra
+---
+layout: page
+title: Sinatra
+permalink: /sinatra/
+---
 
 **Sinatra** is a DSL (*domain-specific language*, or a language written for a specific purpose) for building web applications.
 
@@ -32,7 +36,7 @@ Now, accessing the website path `/hi` will yield the above message (which in thi
 
 Get started by running:
 
-```shell
+```
 $ cucumber-sinatra init --app SampleApp lib/sample_app.rb
 ...
 $ rackup
@@ -42,7 +46,7 @@ Run your Cucumber tests from the command line with `$ cucumber`.
 
 Now, let's describe a feature using Cucumber:
 
-```shell
+```
 $ mkdir feature
 $ touch homepage.feature
 ```
@@ -74,7 +78,7 @@ Cucumber also uses a language called [Capybara](https://github.com/jnicklas/capy
 
 Get your server up and running by typing
 
-```shell
+```
 $ rackup
 ```
 

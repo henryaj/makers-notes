@@ -1,4 +1,8 @@
-# IO
+---
+layout: page
+title: IO
+permalink: /io/
+---
 
 ```ruby
 some_file = File.new('newfile.txt','w')

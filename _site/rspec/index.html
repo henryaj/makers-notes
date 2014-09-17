@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>RSpec</title>
+    <meta name="description" content="Notes from Makers Academy.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="/rspec/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Makers Notes</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/io/">IO</a>
+          
+        
+          
+          <a class="page-link" href="/ajax/">AJAX</a>
+          
+        
+          
+          <a class="page-link" href="/associations/">Associations</a>
+          
+        
+          
+          <a class="page-link" href="/blocksprocslambdas/">Blocks, Procs and Lambdas</a>
+          
+        
+          
+          <a class="page-link" href="/classes/">Classes</a>
+          
+        
+          
+          <a class="page-link" href="/collections/">Collections</a>
+          
+        
+          
+          <a class="page-link" href="/css/">CSS and the Box Model</a>
+          
+        
+          
+          <a class="page-link" href="/databases/">Databases</a>
+          
+        
+          
+          <a class="page-link" href="/datetime/">Date and Time</a>
+          
+        
+          
+          <a class="page-link" href="/debugging/">Debugging</a>
+          
+        
+          
+          <a class="page-link" href="/designpatterns/">Design Patterns</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/gems/">Gems</a>
+          
+        
+          
+          <a class="page-link" href="/git-github/">Git and GitHub</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/inheritanceandcomposition/">Inheritance and Composition</a>
+          
+        
+          
+          <a class="page-link" href="/javascript/">Javascript</a>
+          
+        
+          
+          <a class="page-link" href="/logic/">Logic and Booleans</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/pairing/">Pair programming</a>
+          
+        
+          
+          <a class="page-link" href="/rspec/">RSpec</a>
+          
+        
+          
+          <a class="page-link" href="/security/">Security</a>
+          
+        
+          
+          <a class="page-link" href="/settersandgetters/">Setter and Getter methods</a>
+          
+        
+          
+          <a class="page-link" href="/sinatra/">Sinatra</a>
+          
+        
+          
+          <a class="page-link" href="/super/">Super</a>
+          
+        
+          
+          <a class="page-link" href="/testingstyles/">Testing Styles</a>
+          
+        
+          
+          <a class="page-link" href="/yield/">Yield</a>
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">RSpec</h1>
+  </header>
+
+  <article class="post-content">
+    <p>Short for &#39;Ruby specification&#39;.</p>
+
+<p>Benefits of testing:</p>
+
+<ul>
+<li>Your code works.</li>
+<li>You write less code! Specifically, you write only the code that&#39;s needed to pass your tests – nothing more.</li>
+<li>Trying to break your tests gives you a good idea of how robust your code is and what everything&#39;s doing.</li>
+</ul>
+
+<h2>Getting started</h2>
+
+<p>Running <code>rspec --init</code> in the directory you want to test produces a <code>lib</code> folder with a <code>spec_helper.rb</code> file inside.</p>
+
+<h2>Raising errors</h2>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">expect</span><span class="p">(</span><span class="nb">lambda</span> <span class="p">{</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">}</span> <span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">raise_error</span>
+<span class="c1"># or:</span>
+<span class="n">expect</span><span class="p">{</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span> <span class="p">}</span><span class="o">.</span><span class="n">to</span> <span class="n">raise_error</span>
+</code></pre></div>
+<p>If you don&#39;t use curly braces, the error kills the RSpec <code>expect</code> statement. The braces effectively allow RSpec to rescue the test from the error.</p>
+
+<h2>Helper methods</h2>
+
+<p>Methods you define in RSpec to assist you with tests.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">helper</span>
+    <span class="mi">20</span><span class="o">.</span><span class="n">times</span><span class="p">{</span> <span class="n">dock</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">bike</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Now you can call <code>helper</code> in other tests.</p>
+
+<h2>Testing modules</h2>
+
+<p>Use &#39;shared examples&#39;.</p>
+
+<h2>Good practice</h2>
+
+<ul>
+<li>Group your tests by context. This makes them must clearer to read when they&#39;re displayed when running RSpec.</li>
+<li>Mark a test as pending using <code>xit</code> instead of <code>it</code>.</li>
+<li>Avoid &quot;magic numbers&quot;, like <code>20.times.do</code>. What does the 20 signify?</li>
+</ul>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Makers Notes</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Makers Notes</li>
+          <li><a href="mailto:henry@henrystanley.om">henry@henrystanley.om</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Notes from Makers Academy.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

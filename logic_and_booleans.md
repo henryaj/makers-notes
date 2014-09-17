@@ -1,4 +1,8 @@
-# Logic and booleans
+---
+layout: page
+title: Logic and Booleans
+permalink: /logic/
+---
 
 All of
 

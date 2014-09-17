@@ -1,4 +1,8 @@
-# Setter and Getter methods
+---
+layout: page
+title: Setter and Getter methods
+permalink: /settersandgetters/
+---
 
 ```ruby
 class Person

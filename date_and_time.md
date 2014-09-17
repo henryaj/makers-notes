@@ -1,4 +1,8 @@
-# Date and Time
+---
+layout: page
+title: Date and Time
+permalink: /datetime/
+---
 
 Date and time are painful to work with. Ruby's built-in ```Time``` and ```Date``` classes help.
 

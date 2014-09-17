@@ -1,4 +1,8 @@
-# Security
+---
+layout: page
+title: Security
+permalink: /security/
+---
 
 Storing passwords in plain text (unencrypted) is a very bad idea for a number of reasons. Usually, passwords are stored as *hashes* in the database. 
 

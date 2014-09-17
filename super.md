@@ -1,4 +1,8 @@
-# Super
+---
+layout: page
+title: Super
+permalink: /super/
+---
 
 If you define a method of the same name as a parent's method, the child method takes priority.
 

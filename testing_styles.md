@@ -1,4 +1,8 @@
-# Testing styles
+---
+layout: page
+title: Testing Styles
+permalink: /testingstyles/
+---
 
 ## Chicago style TDD
 

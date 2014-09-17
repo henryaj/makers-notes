@@ -1,4 +1,8 @@
-# Yield
+---
+layout: page
+title: Yield
+permalink: /yield/
+---
 
 Yield is a keyword that allows you to execute a block of code passed to a method.
 

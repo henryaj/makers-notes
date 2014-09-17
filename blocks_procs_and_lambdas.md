@@ -1,4 +1,8 @@
-# Blocks, procs and lambdas
+---
+layout: page
+title: Blocks, Procs and Lambdas
+permalink: /blocksprocslambdas/
+---
 
 * *Blocks* get used every day. All languages have them.
 * *Procs* and *lambdas* are useful, but less common. They aren't featured in all languages. Very handy for Rails.

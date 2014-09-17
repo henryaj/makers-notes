@@ -1,8 +1,13 @@
-# RSpec
+---
+layout: page
+title: RSpec
+permalink: /rspec/
+---
 
 Short for 'Ruby specification'.
 
 Benefits of testing:
+
 * Your code works.
 * You write less code! Specifically, you write only the code that's needed to pass your tests – nothing more.
 * Trying to break your tests gives you a good idea of how robust your code is and what everything's doing.

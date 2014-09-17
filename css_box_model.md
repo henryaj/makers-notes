@@ -1,4 +1,8 @@
-# CSS
+---
+layout: page
+title: CSS and the Box Model
+permalink: /css/
+---
 
 ## Divs
 

@@ -1,4 +1,8 @@
-# Gems
+---
+layout: page
+title: Gems
+permalink: /gems/
+---
 
 Gems are pre-packaged bits of Ruby code that you can use in your own Ruby applications.
 

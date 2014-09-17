@@ -1,5 +1,8 @@
-# Debugging
-
+---
+layout: page
+title: Debugging
+permalink: /debugging/
+---
 ### Read the error message
 
 When you encounter an error in testing, always read the error message carefully

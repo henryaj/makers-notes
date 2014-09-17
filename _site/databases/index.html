@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Databases</title>
+    <meta name="description" content="Notes from Makers Academy.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="/databases/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Makers Notes</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/io/">IO</a>
+          
+        
+          
+          <a class="page-link" href="/ajax/">AJAX</a>
+          
+        
+          
+          <a class="page-link" href="/associations/">Associations</a>
+          
+        
+          
+          <a class="page-link" href="/blocksprocslambdas/">Blocks, Procs and Lambdas</a>
+          
+        
+          
+          <a class="page-link" href="/classes/">Classes</a>
+          
+        
+          
+          <a class="page-link" href="/collections/">Collections</a>
+          
+        
+          
+          <a class="page-link" href="/css/">CSS and the Box Model</a>
+          
+        
+          
+          <a class="page-link" href="/databases/">Databases</a>
+          
+        
+          
+          <a class="page-link" href="/datetime/">Date and Time</a>
+          
+        
+          
+          <a class="page-link" href="/debugging/">Debugging</a>
+          
+        
+          
+          <a class="page-link" href="/designpatterns/">Design Patterns</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/gems/">Gems</a>
+          
+        
+          
+          <a class="page-link" href="/git-github/">Git and GitHub</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/inheritanceandcomposition/">Inheritance and Composition</a>
+          
+        
+          
+          <a class="page-link" href="/javascript/">Javascript</a>
+          
+        
+          
+          <a class="page-link" href="/logic/">Logic and Booleans</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/pairing/">Pair programming</a>
+          
+        
+          
+          <a class="page-link" href="/rspec/">RSpec</a>
+          
+        
+          
+          <a class="page-link" href="/security/">Security</a>
+          
+        
+          
+          <a class="page-link" href="/settersandgetters/">Setter and Getter methods</a>
+          
+        
+          
+          <a class="page-link" href="/sinatra/">Sinatra</a>
+          
+        
+          
+          <a class="page-link" href="/super/">Super</a>
+          
+        
+          
+          <a class="page-link" href="/testingstyles/">Testing Styles</a>
+          
+        
+          
+          <a class="page-link" href="/yield/">Yield</a>
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Databases</h1>
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+<p>A digital washing machine for that gentleman! I&#39;ll send it by email
+—<em><a href="http://ecomba.pro">Enrique Comba Riepenhausen</a>, 2014</em></p>
+</blockquote>
+
+<p>Think of a database as being like an Excel workbook. One workbook contains many sheets, each of which is a table and has a name. In each sheet, you have a number of columns, and a number of rows. Each row is a data point.  </p>
+
+<p>Databases are very particular about the types of input they accept. There are no strings – there are only <code>VARCHAR</code>s (variable character fields) which usually have a limit of 255 characters. To store objects longer than this, you might have to use <code>TEXT</code> (in Postgres) or a <code>BLOB</code> (binary large object).</p>
+
+<h2> Interacting with databases</h2>
+
+<p>Having to switch between your nice object-oriented language into SQL (structured query language) every five minutes is super annoying. So there&#39;s an intermediate layer, called ORM (Object Relational Mapping), that translates your OO commands into an SQL query.</p>
+
+<p>This also saves you from having to know exactly how the database protocol works. Not all relational databases have the same protocol, but you can just use a different ORM to deal with this. (Note that this is a nice example of the <em>adapter pattern</em>.)</p>
+
+<h3>ORMs – Datamapper</h3>
+
+<p>A tool like <a href="http://datamapper.org">Datamapper</a> is an example of an ORM – it makes setting up and interacting with databases from within Ruby trivial.</p>
+
+<p>For example, say you create the class <code>Link</code>:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Link</span>
+  <span class="kp">include</span> <span class="no">DataMapper</span><span class="o">::</span><span class="no">Resource</span>
+
+  <span class="n">property</span> <span class="ss">:id</span><span class="p">,</span>     <span class="no">Serial</span>
+  <span class="n">property</span> <span class="ss">:title</span><span class="p">,</span>  <span class="nb">String</span>
+  <span class="n">property</span> <span class="ss">:url</span><span class="p">,</span>    <span class="nb">String</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Now, when you run <code>DataMapper.finalize</code>, it dives into the class you made, takes the class name, downcases it, pluralises it, turns it into a symbol, and makes a new table with that name. It also adds the <code>property</code> items as columns in the table.</p>
+
+<p>Run <code>DataMapper.auto_upgrade!</code> and DataMapper will go and actually make the database and tables.</p>
+
+<p>In your code, you can now make new links and do things to them.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s1">&#39;Makers Academy&#39;</span><span class="p">,</span>
+                   <span class="ss">description</span><span class="p">:</span> <span class="s1">&#39;Learn to code in 12 weeks&#39;</span><span class="p">,</span>
+                   <span class="ss">url</span><span class="p">:</span> <span class="s1">&#39;http://www.makersacademy.com&#39;</span><span class="p">)</span>
+
+<span class="n">link</span><span class="o">.</span><span class="n">attributes</span> <span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s1">&#39;Join Makers Academy&#39;</span><span class="p">)</span> <span class="c1"># updates the row</span>
+<span class="n">link</span><span class="o">.</span><span class="n">save</span> <span class="c1"># saves the change</span>
+
+<span class="n">link</span><span class="o">.</span><span class="n">update</span> <span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s1">&#39;Join Makers Academy&#39;</span><span class="p">)</span> <span class="c1"># does the above but with one command</span>
+
+<span class="n">link</span><span class="o">.</span><span class="n">destroy</span> <span class="c1"># deletes the row</span>
+</code></pre></div>
+<p>Other commands you can run:</p>
+
+<ul>
+<li><code>x.new</code> – creates a new instance. Set its attributes with <code>x.attributes</code></li>
+<li><code>x.create</code> – creates a new instance with attributes that you specify.</li>
+<li><code>x.all</code> – returns the entire database</li>
+<li><code>x.first</code> – returns the first element in the database</li>
+<li><code>x.last</code> – returns the final element in the database (be careful with ordering, though, as this may not be done in a consistent way across databases)</li>
+<li><code>x.get(3)</code> – returns the element with ID 3</li>
+<li><code>x.first_or_create</code> – gets the first element if it exists, otherwise creates it</li>
+</ul>
+
+<p>There are many more of these methods – refer to the <a href="http://datamapper.org/docs/">Datamapper documentation</a> for more.</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Makers Notes</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Makers Notes</li>
+          <li><a href="mailto:henry@henrystanley.om">henry@henrystanley.om</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Notes from Makers Academy.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

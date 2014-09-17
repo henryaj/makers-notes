@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Sinatra</title>
+    <meta name="description" content="Notes from Makers Academy.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="/sinatra/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Makers Notes</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/io/">IO</a>
+          
+        
+          
+          <a class="page-link" href="/ajax/">AJAX</a>
+          
+        
+          
+          <a class="page-link" href="/associations/">Associations</a>
+          
+        
+          
+          <a class="page-link" href="/blocksprocslambdas/">Blocks, Procs and Lambdas</a>
+          
+        
+          
+          <a class="page-link" href="/classes/">Classes</a>
+          
+        
+          
+          <a class="page-link" href="/collections/">Collections</a>
+          
+        
+          
+          <a class="page-link" href="/css/">CSS and the Box Model</a>
+          
+        
+          
+          <a class="page-link" href="/databases/">Databases</a>
+          
+        
+          
+          <a class="page-link" href="/datetime/">Date and Time</a>
+          
+        
+          
+          <a class="page-link" href="/debugging/">Debugging</a>
+          
+        
+          
+          <a class="page-link" href="/designpatterns/">Design Patterns</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/gems/">Gems</a>
+          
+        
+          
+          <a class="page-link" href="/git-github/">Git and GitHub</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/inheritanceandcomposition/">Inheritance and Composition</a>
+          
+        
+          
+          <a class="page-link" href="/javascript/">Javascript</a>
+          
+        
+          
+          <a class="page-link" href="/logic/">Logic and Booleans</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/pairing/">Pair programming</a>
+          
+        
+          
+          <a class="page-link" href="/rspec/">RSpec</a>
+          
+        
+          
+          <a class="page-link" href="/security/">Security</a>
+          
+        
+          
+          <a class="page-link" href="/settersandgetters/">Setter and Getter methods</a>
+          
+        
+          
+          <a class="page-link" href="/sinatra/">Sinatra</a>
+          
+        
+          
+          <a class="page-link" href="/super/">Super</a>
+          
+        
+          
+          <a class="page-link" href="/testingstyles/">Testing Styles</a>
+          
+        
+          
+          <a class="page-link" href="/yield/">Yield</a>
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Sinatra</h1>
+  </header>
+
+  <article class="post-content">
+    <p><strong>Sinatra</strong> is a DSL (<em>domain-specific language</em>, or a language written for a specific purpose) for building web applications.</p>
+
+<p>It can be confusing. Suddenly, the single-user terminal apps you&#39;ve been writing are up on the web for everyone to see, and they need to behave differently as a result.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;sinatra&#39;</span>
+
+<span class="n">get</span> <span class="s1">&#39;/&#39;</span> <span class="k">do</span>
+    <span class="s1">&#39;hello Makers!&#39;</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>This code will intercept an HTTP GET request sent to &#39;/&#39;, and reply with &#39;hello Makers!&#39; in plain text. Simple.</p>
+
+<h2>Routes</h2>
+
+<p>In the above example, &#39;/&#39; is the <em>route</em>. You can define a bunch of other routes, too. For example:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">get</span> <span class="s1">&#39;/hi&#39;</span> <span class="k">do</span>
+    <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="no">Hello</span> <span class="no">Makers</span><span class="o">!&lt;</span><span class="sr">/h1&gt;</span>
+<span class="sr">end</span>
+</code></pre></div>
+<p>Now, accessing the website path <code>/hi</code> will yield the above message (which in this case will appear big and bold on the page, as we have wrapped it in <code>h1</code> tags.)</p>
+
+<h2>Testing with Cucumber</h2>
+
+<p><a href="http://cukes.info">Cucumber</a> is used for <em>acceptance testing</em> – it acts as if it were a person using the application to make sure it works. You can use Cucumber with Sinatra by using the <a href="https://github.com/bernd/cucumber-sinatra">cucumber-sinatra gem</a>.</p>
+
+<p>Get started by running:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ cucumber-sinatra init --app SampleApp lib/sample_app.rb
+...
+$ rackup
+</code></pre></div>
+<p>Run your Cucumber tests from the command line with <code>$ cucumber</code>.</p>
+
+<p>Now, let&#39;s describe a feature using Cucumber:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ mkdir feature
+$ touch homepage.feature
+</code></pre></div><div class="highlight"><pre><code class="language-cucumber" data-lang="cucumber"><span class="k">Feature:</span><span class="nf"> The homepage</span>
+<span class="nf">  In order to show off Cucumber at Makers</span>
+<span class="nf">  I want to present Cucumber</span>
+</code></pre></div>
+<p>This will run, but doesn&#39;t have any actual tests (or <em>scenarios</em>). Let&#39;s add some in the same file.</p>
+<div class="highlight"><pre><code class="language-cucumber" data-lang="cucumber"><span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Being greeted</span>
+<span class="k">    Given </span><span class="nf">I am having a good day</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">I am on the homepage</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see &quot;</span><span class="s">Hello Makers!</span><span class="nf">&quot;</span>
+</code></pre></div>
+<p>This <code>Given</code>/<code>When</code>/<code>Then</code> notation is particular to Cucumber (or specifically Gherkin, the language Cucumber is written in).</p>
+
+<p>For each step, you write a step definition in Ruby. </p>
+
+<p>cucumber-sinatra has some built in step definitions, so you can write some steps without needing to define them (like <code>When I am on the homepage</code>). These built-in definitions live in <code>features/step_definitions/</code>, and there are support files in <code>support/</code> which do things like substituting &#39;homepage&#39; for &#39;/&#39;. <strong>Consider deleting <code>features/step_definitions/web_steps.rb</code> to get some practice in writing your own step definitions.</strong></p>
+
+<p>Cucumber also uses a language called <a href="https://github.com/jnicklas/capybara">Capybara</a>.</p>
+
+<h2>Running the damn thing</h2>
+
+<p>Get your server up and running by typing</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ rackup
+</code></pre></div>
+<p>What this command <em>actually does</em> is read through your <code>sample_app.rb</code> file, looks at the various routes you&#39;ve set, and creates a <em>routing table</em> from it. Then it starts an HTTP server on a particular port and makes it available for connections.</p>
+
+<h2>Config</h2>
+
+<p>Look at the following code from the <a href="http://www.sinatrarb.com/configuration.html">Sinatra documentation</a>:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">set</span> <span class="ss">:views</span><span class="p">,</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;templates&quot;</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div>
+<p>Why do it this way? Seems kinda convoluted.</p>
+
+<p>The reason this is so important is that it bases the path to your <code>views</code> directory on the site root. If you ran <code>rackup</code> from a different directory and you&#39;d hard-coded the views path, then it would break – it wouldn&#39;t be able to find views relative to where you&#39;re running the server file from.</p>
+
+<p>Using <code>root</code> gives a salient point that your site is always run from.</p>
+
+<h2>Sessions</h2>
+
+<p>HTTP by nature is <em>stateless</em> - so it doesn&#39;t recognise repeat visitors, or even visitors across pages. A lot of basic things fail because of this – how could you log in to a site, for example, if it didn&#39;t remember you?</p>
+
+<p>This is where sessions come into play.</p>
+
+<p>The server creates a unique ID (or UID) for each visitor and stores it in a hash table. This value is served back up to users to identify them, either in a cookie or (more rarely) in the URI itself. A <em>cookie</em> is returned as part of the header – it&#39;s just a string inside the header.</p>
+
+<p>A cookie sent by a particular site can only be read from the browser by that site.</p>
+
+<p>So how do you use sessions in Sinatra?</p>
+
+<p><code>sample_app.rb</code>:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">SampleApp</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">enable</span> <span class="ss">:sessions</span>
+
+  <span class="n">get</span> <span class="s1">&#39;/&#39;</span> <span class="k">do</span>
+    <span class="vi">@number</span> <span class="o">=</span> <span class="n">session</span>
+    <span class="n">erb</span> <span class="ss">:index</span>
+  <span class="k">end</span>
+
+  <span class="n">get</span> <span class="s1">&#39;/a/:number&#39;</span> <span class="k">do</span> <span class="o">|</span><span class="n">number</span><span class="o">|</span>
+    <span class="n">session</span><span class="o">[</span><span class="s1">&#39;number&#39;</span><span class="o">]=</span> <span class="n">number</span>
+    <span class="n">redirect</span> <span class="n">to</span> <span class="s1">&#39;/&#39;</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre></div>
+<p>Bear in mind that sessions have a hard limit of 4KB! Usually, to store more than this, you would use a database.</p>
+
+<p>If you wanted to solely use Sinatra, though, you could do this the Very Wrong Way: setting a constant and then writing to that.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">SampleApp</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">enable</span> <span class="ss">:sessions</span>
+
+  <span class="no">GAME</span> <span class="o">=</span> <span class="no">Game</span><span class="o">.</span><span class="n">new</span>
+
+  <span class="n">get</span> <span class="s1">&#39;/&#39;</span> <span class="k">do</span>
+    <span class="vi">@number</span> <span class="o">=</span> <span class="n">session</span>
+    <span class="n">erb</span> <span class="ss">:index</span>
+  <span class="k">end</span>
+
+  <span class="n">get</span> <span class="s1">&#39;/a/:number&#39;</span> <span class="k">do</span> <span class="o">|</span><span class="n">number</span><span class="o">|</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="no">Game</span><span class="o">.</span><span class="n">number</span>
+    <span class="n">redirect</span> <span class="n">to</span> <span class="s1">&#39;/&#39;</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre></div>
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Makers Notes</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Makers Notes</li>
+          <li><a href="mailto:henry@henrystanley.om">henry@henrystanley.om</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Notes from Makers Academy.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

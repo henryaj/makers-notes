@@ -1,4 +1,8 @@
-# Javascript
+---
+layout: page
+title: Javascript
+permalink: /javascript/
+---
 
 A general-purpose, object-oriented programming language. There a number of key differences from Ruby: stricter syntax, no classes, very flexible.
 

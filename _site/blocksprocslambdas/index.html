@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Blocks, Procs and Lambdas</title>
+    <meta name="description" content="Notes from Makers Academy.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="/blocksprocslambdas/">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Makers Notes</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/io/">IO</a>
+          
+        
+          
+          <a class="page-link" href="/ajax/">AJAX</a>
+          
+        
+          
+          <a class="page-link" href="/associations/">Associations</a>
+          
+        
+          
+          <a class="page-link" href="/blocksprocslambdas/">Blocks, Procs and Lambdas</a>
+          
+        
+          
+          <a class="page-link" href="/classes/">Classes</a>
+          
+        
+          
+          <a class="page-link" href="/collections/">Collections</a>
+          
+        
+          
+          <a class="page-link" href="/css/">CSS and the Box Model</a>
+          
+        
+          
+          <a class="page-link" href="/databases/">Databases</a>
+          
+        
+          
+          <a class="page-link" href="/datetime/">Date and Time</a>
+          
+        
+          
+          <a class="page-link" href="/debugging/">Debugging</a>
+          
+        
+          
+          <a class="page-link" href="/designpatterns/">Design Patterns</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/gems/">Gems</a>
+          
+        
+          
+          <a class="page-link" href="/git-github/">Git and GitHub</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/inheritanceandcomposition/">Inheritance and Composition</a>
+          
+        
+          
+          <a class="page-link" href="/javascript/">Javascript</a>
+          
+        
+          
+          <a class="page-link" href="/logic/">Logic and Booleans</a>
+          
+        
+          
+        
+          
+          <a class="page-link" href="/pairing/">Pair programming</a>
+          
+        
+          
+          <a class="page-link" href="/rspec/">RSpec</a>
+          
+        
+          
+          <a class="page-link" href="/security/">Security</a>
+          
+        
+          
+          <a class="page-link" href="/settersandgetters/">Setter and Getter methods</a>
+          
+        
+          
+          <a class="page-link" href="/sinatra/">Sinatra</a>
+          
+        
+          
+          <a class="page-link" href="/super/">Super</a>
+          
+        
+          
+          <a class="page-link" href="/testingstyles/">Testing Styles</a>
+          
+        
+          
+          <a class="page-link" href="/yield/">Yield</a>
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Blocks, Procs and Lambdas</h1>
+  </header>
+
+  <article class="post-content">
+    <ul>
+<li><em>Blocks</em> get used every day. All languages have them.</li>
+<li><em>Procs</em> and <em>lambdas</em> are useful, but less common. They aren&#39;t featured in all languages. Very handy for Rails.</li>
+</ul>
+
+<h2>Blocks</h2>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">phrase</span> <span class="o">=</span> <span class="s2">&quot;The rain in spain falls mainly on the plain&quot;</span>
+
+<span class="c1"># string.gsub(regex_matcher, replace_with)</span>
+
+<span class="n">phrase</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/[aeiou]/</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
+
+<span class="c1"># =&gt; &quot;Th* r**n *n sp**n f*lls m**nly *n th* pl**n&quot;</span>
+</code></pre></div>
+<p>Instead of providing an argument like this, you can pass in a piece of code to execute (a <em>block</em>):</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">phrase</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/[aeiou]/</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">vowel</span><span class="o">|</span> <span class="n">vowel</span><span class="o">.</span><span class="n">upcase</span> <span class="p">}</span>
+
+<span class="c1"># =&gt; &quot;ThE rAIn In spAIn fAlls mAInly On thE plAIn&quot;</span>
+</code></pre></div>
+<p>The bit in curly braces is the block.</p>
+
+<p>Blocks are flexible with the number of arguments they take. For example, <code>each_with_index</code> expects 2 variables, but you could pass in 1 or 0.</p>
+
+<p>Blocks are efficient in terms of both speed and memory. But blocks can&#39;t be referred to elsewhere in your code – use them once and they&#39;re done.</p>
+
+<h2>Procs</h2>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">crazy_upcaser</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">word</span><span class="o">|</span>
+    <span class="nb">puts</span> <span class="n">word</span><span class="o">.</span><span class="n">upcase</span><span class="o">.</span><span class="n">reverse</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/[aeiou]/</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>To call the Proc, you can pass it as an argument with an ampersand:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;horse&#39;</span><span class="o">].</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">crazy_upcaser</span><span class="p">)</span>
+
+<span class="o">=&gt;</span>  <span class="no">TAC</span>
+        <span class="no">GOD</span>
+        <span class="no">ESROH</span>
+</code></pre></div>
+<p>You can only pass one block to a method, but you can pass in multiple procs! You can also pass in Procs as an argument to a method.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">sing_a_song</span><span class="p">(</span><span class="n">verse</span><span class="p">,</span> <span class="n">chorus</span><span class="p">)</span>
+    <span class="n">verse</span><span class="o">.</span><span class="n">call</span>
+    <span class="n">verse</span><span class="o">.</span><span class="n">call</span>
+    <span class="n">verse</span><span class="o">.</span><span class="n">call</span>
+    <span class="n">chorus</span><span class="o">.</span><span class="n">call</span>
+    <span class="n">verse</span><span class="o">.</span><span class="n">call</span>
+    <span class="n">verse</span><span class="o">.</span><span class="n">call</span>
+    <span class="n">chorus</span><span class="o">.</span><span class="n">call</span>
+<span class="k">end</span>
+
+<span class="n">sing_a_song</span><span class="p">(</span><span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s1">&#39;la la la&#39;</span> <span class="p">},</span> 
+                        <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s1">&#39;dum de dum&#39;</span> <span class="p">})</span>
+</code></pre></div>
+<h2> Lambdas</h2>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">say_hello_proc</span>          <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s2">&quot;Hello&quot;</span> <span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">say_hello_lambda</span>        <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s2">&quot;hello &quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>Lambdas are very similar to Procs but they are <em>strict</em> with the number of arguments they take. This can be useful in some cases.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">round</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="s2">&quot;Batman&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;Superman&quot;</span>
+<span class="k">end</span>
+<span class="c1"># Batman wins.</span>
+
+<span class="n">round</span> <span class="mi">2</span>
+    <span class="nb">lambda</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&quot;Batman&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">call</span>
+    <span class="k">return</span> <span class="s2">&quot;Superman&quot;</span>
+<span class="k">end</span>
+<span class="c1"># Superman wins.</span>
+</code></pre></div>
+<p>In round 2, the return statement is contained within a lambda so doesn&#39;t exit out of the method.</p>
+
+<p>However, a Proc <em>does</em> exit out of the method:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">round</span> <span class="mi">3</span>
+    <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&quot;Batman&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">call</span>
+    <span class="k">return</span> <span class="s2">&quot;Superman&quot;</span>
+<span class="k">end</span>
+<span class="c1"># Batman wins.</span>
+</code></pre></div>
+<p>Another way of defining lambdas is to use <code>-&gt;</code>:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"> <span class="o">-&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">&quot;Batman&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">call</span>
+</code></pre></div>
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Makers Notes</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Makers Notes</li>
+          <li><a href="mailto:henry@henrystanley.om">henry@henrystanley.om</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">Notes from Makers Academy.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

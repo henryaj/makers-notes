@@ -1,5 +1,8 @@
-# Collections
-
+---
+layout: page
+title: Collections
+permalink: /collections/
+---
 ## Ranges
 
 ```ruby

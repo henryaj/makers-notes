@@ -1,4 +1,8 @@
-# Pair programming
+---
+layout: page
+title: Pair programming
+permalink: /pairing/
+---
 
 Pair programming or *pairing* is coding for two. One person types, the other person watches, and both discuss the code that's being written. After a set period of time, you switch roles.
 
