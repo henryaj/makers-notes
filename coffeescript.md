@@ -38,6 +38,8 @@ Be careful of that third line above, though – if you have a fizzbuzz.js file i
 
 And now, the code:
 
+`src/fizzbuzz.coffee`:
+
 ```coffee
 class Fizzbuzz
   isDivisibleByThree: (number) ->
@@ -63,3 +65,5 @@ describe 'Fizzbuzz', -> 
   it '1 is not divisible by 3', ->
     expect(fizzbuzz.isDivisibleByThree(1)).to.be.false
 ```
+
+Note the @ sign in '@fizzbuzz' in the before function. This is like `this.fizzbuzz` in JavaScript – it creates the variable before assigning it.
