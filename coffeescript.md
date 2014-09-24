@@ -12,7 +12,11 @@ If you're using Mocha for tests, you need to 'register' a CoffeeScript compiler 
 mocha --compilers coffee:coffee-script/register 
 ```
 
-Let's write a test.
+You might also have to create a Mocha options file – /test/mocha.opts – and add the following line:
+
+`require 'coffee-script/register'`
+
+Now, let's write a test.
 
 `test/fizzbuzz_test.coffee`:
 
