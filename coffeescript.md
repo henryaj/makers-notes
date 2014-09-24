@@ -68,6 +68,8 @@ And now, the code:
 class Fizzbuzz
   isDivisibleByThree: (number) ->
     number % 3 == 0
+
+module.exports = Fizzbuzz
 ```
 
 And so on... you know how FizzBuzz goes.
