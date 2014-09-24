@@ -24,7 +24,7 @@ mocha --compilers coffee:coffee-script/register
 
 You might also have to create a Mocha options file – /test/mocha.opts – and add the following line:
 
-`require 'coffee-script/register'`
+`--compilers coffee:coffee-script/register`
 
 Set up your folder structure like this:
 
