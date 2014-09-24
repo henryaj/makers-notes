@@ -6,6 +6,14 @@ CoffeeScript is well-documented, succinct, and elegant.
 
 ## Worked example – FizzBuzz
 
+This assumes you've installed Mocha, CoffeeScript and Chai with the following commands from the folder you're working in:
+
+```shell
+npm install coffee-script
+npm install chai
+npm install mocha
+```
+
 If you're using Mocha for tests, you need to 'register' a CoffeeScript compiler with Mocha first.
 
 ```shell
@@ -15,6 +23,16 @@ mocha --compilers coffee:coffee-script/register
 You might also have to create a Mocha options file – /test/mocha.opts – and add the following line:
 
 `require 'coffee-script/register'`
+
+Set up your folder structure like this:
+
+```
+├── src
+│   └── fizzbuzz.coffee
+└── test
+    ├── fizzbuzz_spec.coffee
+    └── mocha.opts
+```
 
 Now, let's write a test.
 
