@@ -28,3 +28,6 @@
 * [super](https://github.com/henryaj/makers-notes/blob/master/super.md)
 * [testing_styles](https://github.com/henryaj/makers-notes/blob/master/testing_styles.md)
 * [yield](https://github.com/henryaj/makers-notes/blob/master/yield.md)
+* [websockets](https://github.com/henryaj/makers-notes/blob/master/websockets.md)
+* [node](https://github.com/henryaj/makers-notes/blob/master/node.md)
+* [coffeescript](https://github.com/henryaj/makers-notes/blob/master/coffeescript.md)
