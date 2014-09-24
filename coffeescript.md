@@ -14,6 +14,8 @@ npm install chai
 npm install mocha
 ```
 
+You can also use the `-g` flag when running the above commands to install these packages globally, rather than locally.
+
 If you're using Mocha for tests, you need to 'register' a CoffeeScript compiler with Mocha first.
 
 ```shell
