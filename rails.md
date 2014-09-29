@@ -4,11 +4,11 @@ Rails is a popular web framework. Sinatra is a DSL, not a framework – it gives
 
 ## Getting started
 
-`gem install rails` will install the Rails gem. Expect it to take a while. `rails --help` gives a nice help menu.
+`$ gem install rails` will install the Rails gem. Expect it to take a while. `rails --help` gives a nice help menu.
 
 Make a new Rails app:
 
-`rails new yelp_clone -d postgresql -T`
+`$ rails new yelp_clone -d postgresql -T`
 
 The `-T` switch turns off the built-in Rails test suite. `-d` preconfigures your app for a particular type of database – in this case, PostgreSQL.
 
@@ -29,7 +29,7 @@ So many folders... This is what they all do:
 
 Start up the server using `rails server` or `rails s` and visit http://localhost:3000. You'll likely need to run a `rake` task to get your database going – visit the page and you'll be told which.
 
-`bin/rake db:create`
+`$ bin/rake db:create`
 
 You may need to append RAILS_ENV=test to get your tests working.
 
@@ -44,7 +44,7 @@ gem 'capybara', group: :test
 
 With these, we also want to run this command:
 
-`bin/rails generate rspec:install`
+`$ bin/rails generate rspec:install`
 
 This gets RSpec going by creating a /spec directory and a helper file.
 
@@ -86,4 +86,46 @@ resources:restaurants
 
 If you now run `rake routes` you'll get a list of the different routes that this has created.
 
-Running `rspec` again, we get another `RoutingError` – this time, there's no Restaurants controller.
+Running `rspec` again, we get another `RoutingError` – this time, there's no Restaurants controller. Time to make one!
+
+`$ bin/rails g controller restaurants`
+
+(Here, 'g' is short for generate.)
+
+Now, RSpec gives us a different error – that there's no action /index for restaurants. Let's fix that.
+
+`app/controllers/restaurants_controller.rb`:
+
+```ruby
+class RestaurantsController < ApplicationController
+
+def index
+end
+
+end
+```
+
+Now we get a different error – that /app/views/ is missing an index view.
+
+`$ touch app/views/restaurants/index.html.erb`
+
+(Note the requirement to use the double file extension here.)
+
+Now our error is that there's no text on the page! Fix it:
+
+`app/views/restaurants/index.html.erb`:
+
+```ruby
+No restaurants yet!
+```
+
+Cool – but now RSpec is telling us we need a link on the page.
+
+`app/views/restaurants/index.html.erb`:
+
+```ruby
+No restaurants yet!
+<a href='#'>Add a restaurant</a>
+```
+
+And now, our test is passing.
