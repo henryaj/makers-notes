@@ -115,7 +115,7 @@ Now our error is that there's no text on the page! Fix it:
 
 `app/views/restaurants/index.html.erb`:
 
-```ruby
+```html
 No restaurants yet!
 ```
 
@@ -123,7 +123,7 @@ Cool – but now RSpec is telling us we need a link on the page.
 
 `app/views/restaurants/index.html.erb`:
 
-```ruby
+```html
 No restaurants yet!
 <a href='#'>Add a restaurant</a>
 ```
