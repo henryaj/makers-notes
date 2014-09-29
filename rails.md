@@ -54,7 +54,7 @@ In your spec/rails_helper.rb file, add the line:
 
 This lets you use Capybara in your testing environment.
 
-### Let's get testing
+### The first test – home page with a link
 
 Make a spec/features/ directory, and make a new spec file inside it.
 
@@ -129,3 +129,59 @@ No restaurants yet!
 ```
 
 And now, our test is passing.
+
+### The second test – 
+
+Add the following to `spec/features/restaurants_feature_spec.rb`:
+
+```ruby
+context 'restaurants have been added' do
+    before do
+        Restaurant.create(name: 'KFC')
+    end
+
+    it 'should display restaurants' do
+        visit '/restaurants'
+        expect(page).to have_content('KFC')
+        expect(page).not_to have_content('No restaurants yet') 
+    end
+end
+```
+
+Now we need a Restaurants model to satisfy our failing test.
+
+`$ bin/rails g model restaurant name:string description:text`
+
+This command will add 'name' and 'description' properties to the database for each restaurant, and make a migration file that you can run to create these properties. Each item gets an ID automatically. Note that 'restaurant' here is singular, but the controller refers to 'restaurants'.
+
+If you make a mistake, you can type the above command but using 'rails d' – for destroy – to remove the migrate.
+
+Then:
+
+`$ bin/rake db:migrate`
+
+which will run all of your database migrations.[^1]
+
+[^1]: A word on migrations – don't go into those files and edit them. If you want to remove database tables or change the schema, instead write another migration that does that.
+
+Now, in `restaurants_controller.rb` we want to get all of those restaurants from the database. Let's add a method for that (*the below replaces the old method*):
+
+```ruby
+def index
+    @restaurants = Restaurant.all
+end
+```
+
+And in `app/views/restaurants/index.html.erb`:
+
+```erb
+<% if @restaurants.any? %>
+    <@ @restaurants.each do |restaurant| %>
+        <h2> <%= restaurant.name %> </h2>
+    <% end %>
+<% else %>
+    No restaurants yet
+<% end %>
+
+<a href='#'>Add a restaurant</a>
+```
