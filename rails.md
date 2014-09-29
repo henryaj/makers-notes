@@ -160,9 +160,9 @@ Then:
 
 `$ bin/rake db:migrate`
 
-which will run all of your database migrations.[^1]
+which will run all of your database migrations.
 
-[^1]: A word on migrations – don't go into those files and edit them. If you want to remove database tables or change the schema, instead write another migration that does that.
+(A word on migrations – don't go into those files and edit them. If you want to remove database tables or change the schema, instead write another migration that does that.)
 
 Now, in `restaurants_controller.rb` we want to get all of those restaurants from the database. Let's add a method for that (*the below replaces the old method*):
 
