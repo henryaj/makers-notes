@@ -176,7 +176,7 @@ And in `app/views/restaurants/index.html.erb`:
 
 ```erb
 <% if @restaurants.any? %>
-    <@ @restaurants.each do |restaurant| %>
+    <% @restaurants.each do |restaurant| %>
         <h2> <%= restaurant.name %> </h2>
     <% end %>
 <% else %>
