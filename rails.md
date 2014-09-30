@@ -331,7 +331,10 @@ Validation
 ----------
 
 > And if you ever need self validation
+>
 > Just meet me in the alley by the railway station
+>
+>
 > -- Morrissey
 
 So... we don't want two KFCs. We only want one. So we'll need some validations
