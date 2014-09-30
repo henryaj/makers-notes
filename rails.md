@@ -130,7 +130,7 @@ No restaurants yet!
 
 And now, our test is passing.
 
-### The second test – 
+### The second test – creating a restaurant
 
 Add the following to `spec/features/restaurants_feature_spec.rb`:
 
@@ -185,3 +185,82 @@ And in `app/views/restaurants/index.html.erb`:
 
 <a href='#'>Add a restaurant</a>
 ```
+
+## Migrations – adding a column to a database
+
+```shell
+$ rails g migration AddDescriptionToRestaurants description:text
+$ rake db:migrate
+```
+
+## Associations
+
+Let's add some reviews for our restaurants.
+
+`app/spec/features/review_spec.rb`:
+
+```ruby
+require 'rails_helper'
+
+describe 'reviewing' do
+    before do
+        Restaurant.create(name: 'KFC')
+    end
+
+    it 'allows users to leave a review using a form' do
+       visit '/restaurants'
+       click_link 'Review KFC'
+       fill_in "Thoughts", with: "so so"
+       select '3', from: 'Rating'
+       click_button 'Leave Review'
+       
+       expect(current_path).to eq '/restaurants'
+       expect(page).to have_content('so so')
+    end
+
+end
+```
+
+First, we need a new route for reviews. Update `routes.rb` to have a nested resource:
+
+```ruby
+resource :restaurants do
+    resource :reviews
+end
+```
+
+Then, add a link (using Rails' `link_to` helper) to `new_restaurant_review_path` (you can see this path appearing in `rake routes`).
+
+Now we need a new controller.
+
+`$ rails g controller reviews`
+
+In `app/controllers/reviews_controller.rb`, add the 'new' method:
+
+```rb
+def new
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @review = Review.new
+end
+```
+
+This sets up @restaurant and @review which get passed into the 'new review' form in the next step.
+
+Keep following the errors RSpec is giving you. Now we need a view:
+
+`app/views/reviews/new.html.erb`:
+
+```erb
+<%= form_for [@restaurant, @review] do |f| %>
+<%= f.label :thoughts %>
+<%= f.text_area :thoughts %>
+
+<%= f.label :rating %>
+<%= f.select :rating, (1..5) %>
+<%= f.submit 'Leave review' %>
+<% end %>
+```
+
+Cool. Now we need a model for reviews – currently they aren't being stored in the database!
+
+`$ rails g model review thoughts:text rating:integer`
