@@ -460,7 +460,7 @@ errors up on our form and make a real mess of it
         <h2> <%= plurazlize(@restaurant.errors.count, "error") %> prohibited this
         restaurant from being saved: </h2>
         <ul>
-            <% @restaurant.errors.fill_messages.each do |message| %>
+            <% @restaurant.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
         </ul>
