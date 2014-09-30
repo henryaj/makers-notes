@@ -264,3 +264,45 @@ Keep following the errors RSpec is giving you. Now we need a view:
 Cool. Now we need a model for reviews – currently they aren't being stored in the database!
 
 `$ rails g model review thoughts:text rating:integer`
+
+Let's add a create method to our reviews controller.
+
+`app/controllers/reviews_controller.rb`:
+
+```ruby
+def create
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @restaurant.reviews.create(params[:reviews].permit(:thoughts, :rating))
+end
+```
+
+RSpec will now complain that we don't have an association between restaurants and reviews. Bummer. Time to fix that.
+
+To `app/models/restaurant.rb`, add:
+
+`has_many :reviews`
+
+Time for a migration.
+
+`$ rails g migration AddResturantIdToReviews restaurant:belongs_to`
+`$ rake db:migrate`
+
+This does some Rails magic – it interprets AddRestaurantIdToReviews and parses it, so it understands that it needs to add 'RestaurantId' to the Reviews model. Then, Rake runs the migration.
+
+If you ever want to undo this, you can rollback a migration using 
+
+`$ rake db:rollback[n]`
+
+where *n* is the number of migrations you want to roll back.
+
+Now, if you look at your `schema.rb` you'll see the new assocation between restaurants and reviews.
+
+RSpec now gives an error about a missing template for create, so time to create that. Let's add the following line to the end of the create method in the reviews model.
+
+`app/controllers/reviews_controller.rb`:
+
+```ruby
+redirect_to restaurants_path
+```
+
+Finally, update your restaurants index.html.erb to display the actual reviews, which you can get at by calling `restaurants.reviews.each` and iterating over them.
