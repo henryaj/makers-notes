@@ -19,7 +19,7 @@ So many folders... This is what they all do:
 * `vendors` – a place for resources that you haven't written but are needed for the project, like JQuery.
 * `public` – public resources. These will remain available even if the server goes down. Includes all your error pages by default.
 * `log` – keeps server logs and terminal output.
-* `config` – configuration information, including `database.yml` which includes database configuration details, a routes file, 
+* `config` – configuration information, including `database.yml` which includes database configuration details, a routes file,
 * `bin` – contains your specified version of Rails.
 * `app` – where the magic happens. Contains models, views and controllers.
 
@@ -143,7 +143,7 @@ context 'restaurants have been added' do
     it 'should display restaurants' do
         visit '/restaurants'
         expect(page).to have_content('KFC')
-        expect(page).not_to have_content('No restaurants yet') 
+        expect(page).not_to have_content('No restaurants yet')
     end
 end
 ```
@@ -213,7 +213,7 @@ describe 'reviewing' do
        fill_in "Thoughts", with: "so so"
        select '3', from: 'Rating'
        click_button 'Leave Review'
-       
+
        expect(current_path).to eq '/restaurants'
        expect(page).to have_content('so so')
     end
@@ -289,7 +289,7 @@ Time for a migration.
 
 This does some Rails magic – it interprets AddRestaurantIdToReviews and parses it, so it understands that it needs to add 'RestaurantId' to the Reviews model. Then, Rake runs the migration.
 
-If you ever want to undo this, you can rollback a migration using 
+If you ever want to undo this, you can rollback a migration using
 
 `$ rake db:rollback[n]`
 
@@ -306,3 +306,185 @@ redirect_to restaurants_path
 ```
 
 Finally, update your restaurants index.html.erb to display the actual reviews, which you can get at by calling `restaurants.reviews.each` and iterating over them.
+
+Part 4
+======
+
+belongs_to
+----------
+
+a one line in the `review.rb` model will tie the review to a restaurant.
+
+```ruby
+belongs_to :restaurant
+```
+
+But - what if the restaurant gets deleted? This would lead to reviews with no
+restaurant - orphan reviews. We'd want to KILL OUR ORPHANS. Note: do not kill
+orphans.
+
+over in restaurant.rb model
+```ruby
+has_many :reviews, dependent: :destroy
+```
+Validation
+----------
+
+> And if you ever need self validation
+> Just meet me in the alley by the railway station
+> -- Morrissey
+
+So... we don't want two KFCs. We only want one. So we'll need some validations
+to stop some fool creating too many.
+
+First off, we go to the features... because we need a test!
+
+```ruby
+describe 'creating restaurants' do
+    context 'a valid restaurant' do
+
+        #our old tests are here
+
+    context 'an invalid restaurant' do
+        it 'does not let you submit a name that is too short' do
+            visit '/restaurant'
+            click_link 'Add a restaurant'
+            fill_in 'Name', with: 'kf'
+            click_button 'Create Restaurant'
+            expect(page).not_to have_css 'h2', text: 'kf'
+            expect(page).to have_content 'error'
+        end
+    end
+end
+```
+
+The test will fail... so that's fun. Now - now we'll test the model with some
+unit tests.
+
+Some lucky people got some seperate folders and files in their spec directory
+for `models` and `controllers` - but we can make them if they're missing, we're
+not above a few `mkdir`.
+
+Inside a `models` folder we make a `restaurant_spec.rb`
+
+```ruby
+require 'spec_helper'
+
+Rspec.describe Restaurant, :type => :model do
+    it 'is not valid with a name of less than three characters' do
+        restaurant = Restaurant.new(name: "kf")
+        expect(restaurant).not_to be_valid
+    end
+end
+```
+
+Now this isn't an amzing test as it could `be_not` valid for lots of reasons.
+But it's a good start, right? But we could specify exactly which error.
+
+```ruby
+require 'spec_helper'
+
+Rspec.describe Restaurant, :type => :model do
+    it 'is not valid with a name of less than three characters' do
+        restaurant = Restaurant.new(name: "kf")
+        expect(restaurant).to have(1).error_on(:name)
+        expect(restaurant).not_to be_valid
+    end
+end
+```
+
+If we hit rspeci not it will say itdoesn't know what this `have` is about. So
+let's add `rspec-collection_matchers` to the test group of our Gemfile, and run
+bundle ot get them all installed.
+
+Run rspec now it knows - and it's failing for reasonable reasons.
+
+To pass this we should head over to our model - specifically `restaurant.rb`,
+and add something like the following:
+
+```ruby
+validates :name, length: {minimum: 3}
+```
+
+Easy, eh? That will pass our model test, but not the original feature test.
+
+Let's throw some more validations into our model test while we're here:
+
+```ruby
+it "is not valid unless it is a unique name" do
+    Restaurant.create(name: "The Ivy")
+    restaurant = Restaurant.new(name: "The Ivy")
+    expect(restaurant).to have(1).error_on(:name)
+end
+```
+
+Another fine failure is generated, which we can then go on to fix with
+
+```ruby
+validates :name, length: {minimum: 3}, uniqueness: true
+```
+
+Others are available - `format` for instance, or `presence` - do some reading to
+find out more..
+
+Let's implement this on the frontend and get the feature test passing.
+
+So, where are we saving our restaurant? In the controller's `create` action.
+Let's change that to something that changes behaviour depending on whether the
+new restaurant is valid or not.
+
+```ruby
+def create
+    @restaurant = Restaurant.new(params[:restaurant].permit(:name))
+    if restaurant.save
+        redirect_to restaurants_path
+    else
+        render 'new'
+    end
+end
+```
+
+`Restaurant.create` is a shorhand for `Restaurant.new.save`. By breaking the
+steps up we get to do something new if the restaurant won't save - as it won't
+do when it's invalid!
+
+We're still failing - but at least we're not saving anything. Let's get some
+errors up on our form and make a real mess of it
+
+```erb
+<% if @restaurant.errors.any? %>
+    <div id="errors_explanation" >
+        <h2> <%= plurazlize(@restaurant.errors.count, "error") %> prohibited this
+        restaurant from being saved: </h2>
+        <ul>
+            <% @restaurant.errors.fill_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<%= form_for @restaurant do |f| %>
+    <%= f.label :name %>
+    <%= f.input :name %>
+    <%= f.submit %>
+<%= end %>
+```
+
+Fun action on the `pluralize` helper method there. More on them tomorrow.
+
+And that should pass the test.
+
+We can play around with the message that comes through from the error
+
+```ruby
+validates :name, length: {minimum: 3, message: "Make name longer fool"}
+```
+
+Homework
+========
+
+- Stop evil restauranteurs from giving their reviews amazing and impossible
+  ratings.. Create a review model spec and make sure that the rating field can
+  only accept values from one to five.
+- Hint: take a look at `inclusion:`
