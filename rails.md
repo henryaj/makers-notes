@@ -373,7 +373,7 @@ Inside a `models` folder we make a `restaurant_spec.rb`
 ```ruby
 require 'spec_helper'
 
-Rspec.describe Restaurant, :type => :model do
+RSpec.describe Restaurant, :type => :model do
     it 'is not valid with a name of less than three characters' do
         restaurant = Restaurant.new(name: "kf")
         expect(restaurant).not_to be_valid
@@ -389,7 +389,7 @@ But it's a good start, right? But we could specify exactly which error.
 ```ruby
 require 'spec_helper'
 
-Rspec.describe Restaurant, :type => :model do
+RSpec.describe Restaurant, :type => :model do
     it 'is not valid with a name of less than three characters' do
         restaurant = Restaurant.new(name: "kf")
         expect(restaurant).to have(1).error_on(:name)
