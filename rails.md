@@ -601,3 +601,136 @@ reviews.average(:rating)
 Easy.
 
 Now, add some code to the index page to display this average beside each restaurant.
+
+```erb
+<h3>Average rating: <%= restaurant.average_rating.to_i %></h3>
+```
+
+Looks a bit ugly - so let's get some stars in place.
+
+Look up the unicode for a star  - it's: ★★★★☆
+
+Let's change the feature spec to expect that output.
+
+```ruby
+it "displays an average rating for all reviews" do
+    leave_review("so so", "3") # it's a string because that's what Capybara sees
+    leave_review("Great!", "5")
+    expect(page).to have_content("Average rating: ★★★★☆")
+end
+```
+
+And now let's make sure the page is in utf-8 so we can use those good-lookin'
+stars. Somewhere in the layout `<head>` section.
+
+```erb
+<meta charset="UTF-8">
+```
+
+Right, put together a helper method for generating those stars. It will live in
+the `helpers` directory, inside a file called `reviews_helper.rb`, and under the module `ReviewsHelper`.
+
+First we'll make a test for it - throw together a `helpers` folder in the spec
+folder, and write a new test in a new file called `reviews_helper_spec.rb`.
+
+```ruby
+require 'rails-helper'
+
+describe ReviewsHelper, :type => :helper do
+    context "#star_rating" do
+        it "does nothing for not a number" do
+            expect(helper.star_rating('N/A/')).to eq "N/A"
+        end
+    end
+end
+```
+
+Time to write that helper method.
+
+```ruby
+module ReviewsHelper
+    def star_rating(rating)
+        rating
+    end
+end
+```
+
+Which passes. Refine with a new test:
+
+```ruby
+it "returns five black stars for five" do
+    expect(helper.starr_rating(5)). to eq '★★★★★'
+end
+```
+
+Which needs an updated method to pass.
+
+```ruby
+module ReviewsHelper
+    def star_rating(rating)
+        return rating unless rating.is_a?(Fixnum)
+        "★" * rating
+    end
+end
+```
+
+And it's time for another test:
+
+```ruby
+it "returns three black stars and two white stars for three" do
+    expect(helper.starr_rating(5)). to eq '★★★☆☆'
+end
+```
+
+So we need to work out the remainder to put on the end
+
+```ruby
+module ReviewsHelper
+    def star_rating(rating)
+        return rating unless rating.is_a?(Fixnum)
+        remainder = (5 - rating)
+        "★" * rating + "☆" * remainder
+    end
+end
+```
+
+And now for the killer test:
+
+```ruby
+it "returns three black stars and two white stars for 3.5" do
+    expect(helper.starr_rating(5)). to eq '★★★☆☆'
+end
+```
+
+Alas - we'll get "3.5" back as 3.5 ain't a Fixnum. Let's do a bit of duck typing
+rather than strict typing to identify the input as valid - does it respond to
+`round`? That'll do it...
+
+```ruby
+module ReviewsHelper
+    def star_rating(rating)
+        return rating unless rating.responds_to?(:round)
+        remainder = (5 - rating)
+        "★" * rating.round + "☆" * remainder
+    end
+end
+```
+
+And that should pass those tests. So let's get back to our `index` to get the
+feature test to finally pass.
+
+```erb
+<%= star_rating(restaurant.average_rating) %>
+```
+
+We created out own helper method. But Rails has a whole bunch more for us to
+use, like `pluralize` and others!
+
+Take a look at `ActionView::Helpers` in the docs.
+
+Assignment
+----------
+
+Timestamp the review - and say how long ago it was posted. Something like...
+
+`Great! posted 5 hours ago...`
