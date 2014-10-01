@@ -544,8 +544,8 @@ This passes the test so far, but obviously isn't very useful. Now we need a test
 context '1 review' do
     it 'returns that rating' do
         restaurant = Restaurant.create(name: "The Ivy")
-        restaurant.review.create(rating: 4)
-        expect(restaurant.average_rating).to eq("4")
+        restaurant.reviews.create(rating: 4)
+        expect(restaurant.average_rating).to eq 4
     end
 end
 ...
@@ -571,9 +571,9 @@ And now for multiple reviews...
 context 'multiple reviews' do
     it 'returns the average' do
         restaurant = Restaurant.create(name: "The Ivy")
-        restaurant.review.create(rating: 1)
-        restaurant.review.create(rating: 5)
-        expect(restaurant.average_rating).to eq("3")
+        restaurant.reviews.create(rating: 1)
+        restaurant.reviews.create(rating: 5)
+        expect(restaurant.average_rating).to eq 3
     end
 end
 ...
@@ -590,7 +590,7 @@ def average_rating
 end
 ```
 
-(Note that without `_to.f` to convert an integer to a float, you would find you would only ever have whole number averages.)
+(Note that without `#to_f` to convert an integer to a float, you would find you would only ever have whole number averages.)
 
 BUT! Rails has a built-in method for this. We could instead have done:
 
@@ -734,3 +734,134 @@ Assignment
 Timestamp the review - and say how long ago it was posted. Something like...
 
 `Great! posted 5 hours ago...`
+
+AJAX
+====
+
+> “If you try to cure evil with evil
+> you will add more pain to your fate."
+>
+> Sophocles, *Ajax*
+"
+
+First, set up yourself with the endorsements - get someone elses damn notes for
+that.
+
+Get hold of the `poltergeist` gem
+
+```ruby
+gem 'poltergeist'
+```
+
+in your Gemfile and then `bundle` the hell out of it.
+
+You'll have to do a few config things to et this working - rails helper
+
+```ruby
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+```
+and also
+```ruby
+config.use_transactional_fixtures = false
+```
+
+And then a shit load of stuff to do with DatabaseCleaner... see the link to
+follow... along with the DatabaseCleaner gem itself.
+
+So, now we're set up for JS tests - but we don't have any JS tests.
+
+if we set `js: true` on the test we just built for endorsements, you'll see the
+different driver load.
+
+`application.js` - has MAGIC comments `//=`  - this determines the order in
+which the JS loads on the page - the `//= require_tree .` is everything else in
+the directory. (same for the `*=` css comments)
+
+So, with the endorsements link in the index `endorsements-link` (we could give it a class to
+make our lives easier)
+
+so in the `endorsements.js/coffee` file...
+
+```javascript
+$(document).ready(function(){
+    $('.endorsements-link').on('click', function(event){
+        event.preventDefault();
+        alert('event');
+    })
+})
+```
+
+This still refreshes if you're using `post` method in for the link on the `index` page. But check out that alert!
+
+> Shift the JS in the layout to the after the content
+
+```javascript
+$(document).ready(function(){
+    $('.endorsements-link').on('click', function(event){
+        event.preventDefault();
+        $.post(this.href);
+    })
+})
+```
+
+Now stick a JSON response over in the `EndorsementsController`
+
+```ruby
+render json: {new_endorsement_count: @review.endorsements.counr}
+```
+
+And now in the JS
+
+```javascript
+$(document).ready(function(){
+    $('.endorsements-link').on('click', function(event){
+        event.preventDefault();
+        $.post(this.href, function(response){
+        console.log(response)
+        };
+    })
+})
+```
+
+And if we check the console we should see that number incrementing. So let's
+change that number on the page!
+
+Looking at the index, we could ass a `span` with a class `endorsements-class`
+and add `<%= review.endorsements.count %>`, to allow us to target the number in
+the JS.
+
+```javascript
+$(document).ready(function(){
+    $('.endorsements-link').on('click', function(event){
+        event.preventDefault();
+        $.post(this.href, function(response){
+            $('.endorsements_count').text(response.new_endorsements_count)
+        };
+    })
+})
+```
+
+Which gets them all!
+
+```javascript
+$(document).ready(function(){
+    $('.endorsements-link').on('click', function(event){
+        var endorsementCount = $(this).siblings('.endorsements_count');
+        event.preventDefault();
+        $.post(this.href, function(response){
+            endorsementCount.text(response.new_endorsements_count)
+        };
+    })
+})
+```
+
+Which will only target the sibling of the link clicked to be updated **make sure
+your `index` page is structured appropriately!**
+
+And now your rspec will pass.
+
+Homework
+========
+
+Get some pluralizing of endorsement working on the page. It'd be nice!!
