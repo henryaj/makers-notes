@@ -381,6 +381,8 @@ Rspec.describe Restaurant, :type => :model do
 end
 ```
 
+`:type => :model` gives your test methods appropriate for a model – you couldn't use Capybara here, for example.
+
 Now this isn't an amzing test as it could `be_not` valid for lots of reasons.
 But it's a good start, right? But we could specify exactly which error.
 
@@ -484,10 +486,116 @@ We can play around with the message that comes through from the error
 validates :name, length: {minimum: 3, message: "Make name longer fool"}
 ```
 
-Homework
-========
+For homework, stop evil restauranteurs from giving their reviews amazing and impossible ratings.. Create a review model spec and make sure that the rating field can only accept values from one to five. Hint: take a look at `inclusion:`.
 
-- Stop evil restauranteurs from giving their reviews amazing and impossible
-  ratings.. Create a review model spec and make sure that the rating field can
-  only accept values from one to five.
-- Hint: take a look at `inclusion:`
+## Helpers
+
+Let's make a helper method that creates an average of all reviews. First, we test.
+
+To `review_feature_spec.rb`, add the below. Here, we've extracted out the leaving review bits into a separate method.
+
+```ruby
+def leave_review(thoughts, rating)
+    visit '/restaurants'
+    click_link 'Review KFC'
+    fill_in "Thoughts", with: thoughts
+    select rating, from: 'Rating'
+    click_button 'Leave Review'
+end
+
+it 'displays an average rating for all reviews' do
+    leave_review('So so', "3")
+    leave_review('Great', "5")
+    expect(page).to have_content("Average: 4")
+end
+```
+
+Now, in our `restaurant_spec.rb`, we add a unit test:
+
+```ruby
+...
+describe '#average_rating' do
+    context 'no reviews' do
+        it 'returns "N/A" when there are no reviews' do
+            restaurant = Restaurant.create(name: "The Ivy")
+            expect(restaruant.average_rating).to eq 'N/A'
+        end
+    end
+end
+...
+```
+
+To make the test pass, we need to update our restaurant model.
+
+`app/models/restaurant.rb`:
+
+```ruby
+def average_rating
+    'N/A'
+end
+```
+
+This passes the test so far, but obviously isn't very useful. Now we need a test in the case of having 1 review, and then one for when it has 2 or more reviews.
+
+`restaurant_spec.rb`:
+
+```ruby
+...
+context '1 review' do
+    it 'returns that rating' do
+        restaurant = Restaurant.create(name: "The Ivy")
+        restaurant.review.create(rating: 4)
+        expect(restaurant.average_rating).to eq("4")
+    end
+end
+...
+```
+
+Let's update our `average_rating` method.
+
+`app/models/restaurant.rb`:
+
+```ruby
+def average_rating
+    return 'N/A' if reviews.none?
+    reviews.inject(0) {|memo, review| memo + review.rating}
+end
+```
+
+And now for multiple reviews...
+
+`restaurant_spec.rb`:
+
+```ruby
+...
+context 'multiple reviews' do
+    it 'returns the average' do
+        restaurant = Restaurant.create(name: "The Ivy")
+        restaurant.review.create(rating: 1)
+        restaurant.review.create(rating: 5)
+        expect(restaurant.average_rating).to eq("3")
+    end
+end
+...
+```
+
+And update our `average_rating` method...
+
+`app/models/restaurant.rb`:
+
+```ruby
+def average_rating
+    return 'N/A' if reviews.none?
+    reviews.inject(0) {|memo, review| memo + review.rating} / reviews.count
+end
+```
+
+(Note that without `_to.f` to convert an integer to a float, you would find you would only ever have whole number averages.)
+
+BUT! Rails has a built-in method for this. We could instead have done:
+
+```ruby
+reviews.average(:rating)
+```
+
+Easy.
