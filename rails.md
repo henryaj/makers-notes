@@ -639,7 +639,7 @@ require 'rails-helper'
 describe ReviewsHelper, :type => :helper do
     context "#star_rating" do
         it "does nothing for not a number" do
-            expect(helper.star_rating('N/A/')).to eq "N/A"
+            expect(helper.star_rating('N/A')).to eq "N/A"
         end
     end
 end
@@ -659,7 +659,7 @@ Which passes. Refine with a new test:
 
 ```ruby
 it "returns five black stars for five" do
-    expect(helper.starr_rating(5)). to eq '★★★★★'
+    expect(helper.star_rating(5)). to eq '★★★★★'
 end
 ```
 
@@ -678,7 +678,7 @@ And it's time for another test:
 
 ```ruby
 it "returns three black stars and two white stars for three" do
-    expect(helper.starr_rating(5)). to eq '★★★☆☆'
+    expect(helper.star_rating(5)). to eq '★★★☆☆'
 end
 ```
 
@@ -698,7 +698,7 @@ And now for the killer test:
 
 ```ruby
 it "returns three black stars and two white stars for 3.5" do
-    expect(helper.starr_rating(5)). to eq '★★★☆☆'
+    expect(helper.starr_rating(3.5)). to eq '★★★☆☆'
 end
 ```
 
@@ -709,7 +709,7 @@ rather than strict typing to identify the input as valid - does it respond to
 ```ruby
 module ReviewsHelper
     def star_rating(rating)
-        return rating unless rating.responds_to?(:round)
+        return rating unless rating.respond_to?(:round)
         remainder = (5 - rating)
         "★" * rating.round + "☆" * remainder
     end
