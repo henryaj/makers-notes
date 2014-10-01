@@ -599,3 +599,5 @@ reviews.average(:rating)
 ```
 
 Easy.
+
+Now, add some code to the index page to display this average beside each restaurant.
