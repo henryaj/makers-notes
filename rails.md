@@ -865,3 +865,29 @@ Homework
 ========
 
 Get some pluralizing of endorsement working on the page. It'd be nice!!
+
+## User authentication
+
+We're going to use Devise for this. Devise is very well-documented – Google it.
+
+To your Gemfile, add:
+
+`gem 'devise`
+
+and run
+
+`$ rails generate devise:install`
+
+then 
+
+`$ rails generate devise User`
+
+where User is whatever you want your user class to be called (but User is probably the safest bet for this). Remember, this is a model, so User is singular.
+
+This generateds a model and a migration, and a custom route – `devise_for :users`. Type in `rake routes` to see all those custom Devise routes.
+
+Have a look at `app/models/user.rb` to get the gist of your new User class.
+
+Run `rake db:migrate` to the run the migration that Devise has given us. Now we're good to go!
+
+
