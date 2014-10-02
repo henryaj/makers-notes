@@ -978,4 +978,4 @@ In `views/restaurants/index.html.erb`, you now want to include a photo.
 
 ### Homework
 
-Figure out how to test this with Capybara.
+Figure out how to test this with capybara.
