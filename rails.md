@@ -868,7 +868,9 @@ Get some pluralizing of endorsement working on the page. It'd be nice!!
 
 ## User authentication
 
-We're going to use Devise for this. Devise is very well-documented – Google it.
+### Devise
+
+Devise is very well-documented – Google it.
 
 To your Gemfile, add:
 
@@ -908,6 +910,16 @@ And now we need sign in and sign up links, so add this to the above:
 ```
 
 All of this can be found in the Devise documentation and in `rake routes`.
+
+### OmniAuth
+
+You'll need to create a [Facebook Developer application](http://developers.facebook.com) and use those keys in the code above. For now, just replace the full strings – `ENV['FACEBOOK_KEY']` and `ENV['FACEBOOK_SECRET']` – with those values, but this is bad way of doing this.
+
+The proper way of doing this is adding these values to the Rails `secrets.yml` file. They can then get called into the above code without needing to check them into version control. Call them using the following:
+
+`Rails.application.secret.NAME_OF_SECRET`
+
+Anyway – all of this is in [this tutorial](https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview). Do it!
 
 ### Homework
 
