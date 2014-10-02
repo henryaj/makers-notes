@@ -928,3 +928,54 @@ Write tests and features for the following:
 * You can't review a restaurant more than twice.
 * You can't review your own restaurants.
 * You can only delete your own restaurants.
+
+## Uploading images with Paperclip
+
+Install ImageMagick with
+
+`$ brew install imagemagick`
+
+and then add the Paperclip gem to your Gemfile:
+
+`gem 'paperclip'`
+
+and run `bundle install`.
+
+Here's the boilerplate text from https://github.com/thoughtbot/paperclip:
+
+```ruby
+class User < ActiveRecord::Base
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+end
+```
+
+Add this into your Restaurant model, but obviously change `User` to `Restaurant`. Change `:avatar` to `:image`.
+
+Now, we need a migration to add this :image to our restaurants. Generate it using
+
+`$ rails generate paperclip restaurant image`
+
+and then run `rake db:migrate` to add the new column to your database.
+
+Have a look at `app/views/restaurant/new.html.erb`. Change the first line to the following – this lets you send larger files than normal:
+
+`:html => { :multipart => true }`
+
+and then add 
+
+`<%= f.file_field :image %>`
+
+to your form.
+
+Go to your restaurants controller and add `:image` to your `.permit` statement.
+
+Now, when a user creates a restaurant and includes an image, it gets saved to the /public directory.
+
+In `views/restaurants/index.html.erb`, you now want to include a photo.
+
+`<%= image_tag @restaurant.image.url(:thumb) %>`
+
+### Homework
+
+Figure out how to test this with Capybara.
