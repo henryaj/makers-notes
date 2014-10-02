@@ -890,4 +890,29 @@ Have a look at `app/models/user.rb` to get the gist of your new User class.
 
 Run `rake db:migrate` to the run the migration that Devise has given us. Now we're good to go!
 
+In `views/layout/application.rb`, add a sign out link:
 
+```erb
+<% if user_signed_in? %>
+<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+...
+```
+
+And now we need sign in and sign up links, so add this to the above:
+
+```erb
+...
+<% else %>
+<%= link_to "Sign in", new_user_session_path %>
+<%= link_to "Sign up", new_user_registration_path %>
+```
+
+All of this can be found in the Devise documentation and in `rake routes`.
+
+### Homework
+
+Write tests and features for the following:
+
+* You can't review a restaurant more than twice.
+* You can't review your own restaurants.
+* You can only delete your own restaurants.
