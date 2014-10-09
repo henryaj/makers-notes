@@ -766,8 +766,7 @@ and also
 config.use_transactional_fixtures = false
 ```
 
-And then a shit load of stuff to do with DatabaseCleaner... see the link to
-follow... along with the DatabaseCleaner gem itself.
+And then a shit load of stuff to do with DatabaseCleaner... [take a look at this stuff here](http://devblog.avdi.org/2012/08/31/configuring-database_cleaner-with-rails-rspec-capybara-and-selenium/), and then also remember to install DatabaseCleaner
 
 So, now we're set up for JS tests - but we don't have any JS tests.
 
