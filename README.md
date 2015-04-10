@@ -21,6 +21,7 @@
 * [logic_and_booleans](https://github.com/henryaj/makers-notes/blob/master/logic_and_booleans.md)
 * [modelling](https://github.com/henryaj/makers-notes/blob/master/modelling.md)
 * [pairing](https://github.com/henryaj/makers-notes/blob/master/pairing.md)
+* [rails](https://github.com/henryaj/makers-notes/blob/master/rails.md)
 * [rspec](https://github.com/henryaj/makers-notes/blob/master/rspec.md)
 * [security](https://github.com/henryaj/makers-notes/blob/master/security.md)
 * [setter_and_getter_methods](https://github.com/henryaj/makers-notes/blob/master/setter_and_getter_methods.md)
